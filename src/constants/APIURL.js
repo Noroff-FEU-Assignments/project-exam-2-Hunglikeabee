@@ -1,0 +1,1 @@
+export const APIURL = "https://exam-year2-api.herokuapp.com/"

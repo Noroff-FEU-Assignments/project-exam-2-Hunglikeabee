@@ -8,12 +8,10 @@ import { useContext } from "react"
 import ApiContext from "../context/ApiContext"
 
 
-export default function Home(props) {
+export default function Home() {
 
     const [apiData] = useContext(ApiContext)
 
-
-export default function Home(props) {
     return(
         <>
         <HeadingH1Style>holidaze your life</HeadingH1Style>

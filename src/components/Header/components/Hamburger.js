@@ -25,7 +25,7 @@ export default function Hamburger() {
 
     return(
         <StyledMenu>
-            <StyledHamburger onClick={handleMenu}>
+            <StyledHamburger onClick={handleMenu}gfhjgfj>
                 <StyledBars className={hamburgerState ? "openMenu" : ""} />
             </StyledHamburger>
             {hamburgerState ? showMenu : ""}

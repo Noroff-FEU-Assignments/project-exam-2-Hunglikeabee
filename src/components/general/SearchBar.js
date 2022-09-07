@@ -1,4 +1,5 @@
 import styled from "styled-components";
+<<<<<<< HEAD
 import { useContext } from "react";
 import ApiContext from "../../context/ApiContext";
 import SearchBarResult from "./SearchBarResult";
@@ -41,10 +42,19 @@ const SearchNoResult = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
+=======
+
+const StyledSearch = styled.input`
+    width: 400px;
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 10px;
+>>>>>>> e3ef20bba6e6e8665ebd60adc5001051a363fa24
 `
 
 export default function SearchBar() {
 
+<<<<<<< HEAD
   const [search, setSearch] = useState([])
   const [searchLength, setLength] = useState([])
   const [apiData] = useContext(ApiContext)
@@ -68,4 +78,13 @@ export default function SearchBar() {
       }
     </StyledSearchContainer>
   )
+=======
+
+    const handleSearch = (e) => {
+        console.log(e.target.value)
+    }
+
+
+    return <StyledSearch onChange={handleSearch} />
+>>>>>>> e3ef20bba6e6e8665ebd60adc5001051a363fa24
 }

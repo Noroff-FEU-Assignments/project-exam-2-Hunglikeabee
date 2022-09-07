@@ -49,8 +49,14 @@ export default function Admin() {
 
 
   const schema = yup.object().shape({
-    title: yup.string().required("Enter a title").min(3, "Needs to be atleast 3 characters"),
+    name: yup.string().required("Enter a title").min(3, "Needs to be atleast 3 characters"),
     description: yup.string().required("Enter a description").min(20, "Needs to be atleast 20 characters"),
+    hero: yup.mixed().required("You need to add a image").test("fileSize", "The file is too large", (value) => {
+      return value && value[0].size < 1000000;
+    }),
+    images: yup.mixed().required("You need to add a image").test("fileSize", "The file is too large", (value) => {
+      return value && value[0].size < 1000000;
+    }),
     price: yup.number().typeError("Specify a number").required("Enter a price").min(1, "Needs atleast 1 number")
   })
 
@@ -69,8 +75,10 @@ export default function Admin() {
     try {
       const response = await axios.post(APIURL + "api/hotels", {
         data: {
-          title: data.title,
+          name: data.name,
           description: data.description,
+          hero: data.hero,
+          images: data.images,
           price: data.price
         }
       },
@@ -95,10 +103,12 @@ export default function Admin() {
     <form onSubmit={handleSubmit(postHotel)}>
     {error ? <ErrorMessage>{error}</ErrorMessage> : ""}
       <StyledField disabled={dataTransit}>
-        <input {...register("title")} placeholder="Title" />
-        {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
+        <input {...register("name")} placeholder="Name" />
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         <input {...register("description")} placeholder="Description"/>
-        {errors.title && <ErrorMessage>{errors.description.message}</ErrorMessage>}
+        {errors.description && <ErrorMessage>{errors.description.message}</ErrorMessage>}
+        <input type="file" {...register("hero")} placeholder="Select hero" />
+        <input type="file" {...register("images")} placeholder="Select images" />
         <input {...register("price")} placeholder="Price" />
         {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
         <button>CREATE HOTEL</button>

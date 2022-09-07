@@ -14,6 +14,7 @@ export const ApiProvider = (props) => {
           `https://exam-year2-api.herokuapp.com/api/hotels?populate=*`
         );
         fetchApi ? setApi(fetchApi.data.data) : setApi([])
+        console.log(fetchApi.data.data)
       } catch (e) {
         console.log(e);
       }

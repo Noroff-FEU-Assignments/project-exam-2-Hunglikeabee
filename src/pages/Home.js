@@ -20,7 +20,6 @@ export default function Home() {
         <Hero></Hero>
         <DefaultButton>HEY</DefaultButton>
         <HotelPreview data={apiData} />
-        <HotelPreview />
         </>
 
     )

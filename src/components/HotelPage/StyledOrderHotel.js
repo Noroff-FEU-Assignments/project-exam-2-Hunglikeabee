@@ -2,10 +2,9 @@ import styled from "styled-components"
 
 export const StyledOrderContainer = styled.form`
 background-color: white;
+box-shadow: ${props => props.theme.shading.BoxShadow};
+z-index: 9001;
 position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
 width: 500px;
 max-width: 95vw;
 display: flex;

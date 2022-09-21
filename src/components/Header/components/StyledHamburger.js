@@ -30,7 +30,8 @@ export const StyledShowMenu = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 50px;
+  box-shadow: ${props => props.theme.shading.BoxShadow};
 
   & a {
     padding: 5px;
@@ -57,15 +58,17 @@ export const StyledBlackOverylay = styled.div`
 
 export const StyledHamburger = styled.div`
   z-index: 9001;
-  position: relative;
+  position: absolute;
   width: 40px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  right: 50px;
 
   & .openMenu {
     background: transparent;
+    position: fixed;
   }
 
   & .openMenu::before {
@@ -75,12 +78,12 @@ export const StyledHamburger = styled.div`
 
   & .openMenu::after {
     transform: rotate(-45deg);
-    background-color: ${props => props.theme.colors.Black};
+    background-color: ${props => props.theme.colors.White};
   }
 `;
 
 export const StyledBars = styled.div`
-  position: relative;
+  position: absolute;
   width: 40px;
   height: 5px;
   background: black;

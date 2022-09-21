@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 const StyledLoading = styled.div`
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  width: 150px;
-  height: 150px;
+  width: 70px;
+  height: 70px;
   position: relative;
   overflow: hidden;
 `;

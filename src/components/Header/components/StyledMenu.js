@@ -22,7 +22,7 @@ align-items: center;
 `
 
 export const LogoutButton = styled.button`
-margin-right: 10px;
+margin: 15px;
 width: 76px;
 height: 40px;
 font-size: 22px;

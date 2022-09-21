@@ -1,7 +1,12 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom";
 
+export const StyledHotelsContainer = styled.div`
+position: relative;
+`
+
 export const StyledHotels = styled(Link)`
+position: relative;
 display: flex;
 flex-direction: column;
 height: 350px;

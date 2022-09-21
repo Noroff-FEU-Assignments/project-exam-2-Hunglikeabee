@@ -29,7 +29,7 @@ const SearchResultContainer = styled.div`
 position: absolute;
 border: none;
 border-radius: 50px;
-top: 80px;
+top: 70px;
 background-color: white;
 width: 400px;
 max-width: 95%;

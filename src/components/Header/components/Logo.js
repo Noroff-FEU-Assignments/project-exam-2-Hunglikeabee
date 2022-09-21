@@ -18,6 +18,14 @@ background-repeat: no-repeat;
 @media (max-width: 450px) {
   width: 150px;
 }
+
+@media (max-width: 280px) {
+  width: 100px
+}
+
+@media (max-width: 220px) {
+  display: none;
+}
 `
 
 export default function Logo() {

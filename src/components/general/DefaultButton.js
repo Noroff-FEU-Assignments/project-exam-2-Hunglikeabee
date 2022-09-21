@@ -4,6 +4,7 @@ const StyledButton = styled.button`
   background-color: ${(props) => props.theme.colors.LightBlue};
   width: 250px;
   height: 80px;
+  max-width: 80vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +12,7 @@ const StyledButton = styled.button`
   font-size: 36px;
   border-radius: 50px;
   border: none;
-  box-shadow: ${(props) => props.theme.shading.BoxShadowInset};
+  box-shadow: ${(props) => props.theme.shading.BoxShadow};
   cursor: pointer;
 
   &:hover {
@@ -20,5 +21,5 @@ const StyledButton = styled.button`
 `;
 
 export default function DefaultButton(props) {
-  return <StyledButton>{props.children}</StyledButton>;
+  return <StyledButton {...props}>{props.children}</StyledButton>;
 }

@@ -7,7 +7,7 @@ import Menu from "./components/Menu";
 
 const StyledMenuContainer = styled.div`
 height: 120px;
-width: 100%;
+
 background-color: white;
 box-shadow: 0px 0px 10px 5px black;
 display: flex;

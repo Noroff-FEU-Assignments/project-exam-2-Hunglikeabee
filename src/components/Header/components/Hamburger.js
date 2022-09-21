@@ -1,34 +1,93 @@
-import { useState } from "react";
-import HeadingH1 from "../../general/HeadingH1Style";
-import { StyledMenu, StyledShowMenu, StyledBlackOverylay, StyledHamburger, StyledBars } from "./StyledHamburger";
-import { Link } from 'react-router-dom';
+import { useState, useContext } from "react";
+import {
+  StyledMenu,
+  StyledShowMenu,
+  StyledBlackOverylay,
+  StyledHamburger,
+  StyledBars,
+} from "./StyledHamburger";
+import { NavLink } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
+import { LogoutButton } from "./StyledMenu";
 
 export default function Hamburger() {
+  const [hamburgerState, setHamburger] = useState(false);
 
-    const [hamburgerState, setHamburger] = useState(false)
+  const handleMenu = () => {
+    setHamburger((prev) => !prev);
+  };
 
+  const navigate = useNavigate();
 
-    const handleMenu = () => {
-        setHamburger((prev) => !prev)
-    }
+  const [auth, setAuth] = useContext(AuthContext);
 
-    const showMenu = <>
-                        <StyledShowMenu>
-                            <HeadingH1>Meny</HeadingH1>
-                            <Link onClick={handleMenu} to="/">Forsiden</Link>
-                            <Link onClick={handleMenu} to="torsdagsgolf">Torsdagsgolf</Link>
-                            <Link onClick={handleMenu} to="grasrotandelen">Grasrotandelen</Link>
-                        </StyledShowMenu>
-                        <StyledBlackOverylay onClick={handleMenu} />
-                    </>
+  const handleLogout = () => {
+    setAuth(null);
+    handleMenu();
+    navigate("/");
+  };
 
-    return(
-        <StyledMenu>
-            <StyledHamburger onClick={handleMenu}gfhjgfj>
-                <StyledBars className={hamburgerState ? "openMenu" : ""} />
-            </StyledHamburger>
-            {hamburgerState ? showMenu : ""}
-        </StyledMenu>
-    )
+  let activeStyle = {
+    color: "#FF82E9",
+  };
+
+  const showMenu = (
+    <>
+      <StyledShowMenu>
+        <NavLink
+          onClick={handleMenu}
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          to="/"
+        >
+          HOME
+        </NavLink>
+        <NavLink
+          onClick={handleMenu}
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          to="hotels"
+        >
+          HOTELS
+        </NavLink>
+        <NavLink
+          onClick={handleMenu}
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          to="contact"
+        >
+          CONTACT US
+        </NavLink>
+        {auth ? (
+          <>
+            <NavLink
+              onClick={handleMenu}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="admin"
+            >
+              ADMIN
+            </NavLink>
+            <LogoutButton onClick={handleLogout}>LOGOUT</LogoutButton>
+          </>
+        ) : (
+          <NavLink
+            onClick={handleMenu}
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="login"
+          >
+            LOGIN
+          </NavLink>
+        )}
+      </StyledShowMenu>
+      <StyledBlackOverylay onClick={handleMenu} />
+    </>
+  );
+
+  return (
+    <StyledMenu>
+      <StyledHamburger onClick={handleMenu}>
+        <StyledBars className={hamburgerState ? "openMenu" : ""} />
+      </StyledHamburger>
+      {hamburgerState ? showMenu : ""}
+    </StyledMenu>
+  );
 }

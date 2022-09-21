@@ -6,7 +6,6 @@ export const StyledMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 30px;
 
   @media (min-width: 800px) {
     display: none;
@@ -64,7 +63,7 @@ export const StyledHamburger = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 50px;
+  right: 30px;
 
   & .openMenu {
     background: transparent;

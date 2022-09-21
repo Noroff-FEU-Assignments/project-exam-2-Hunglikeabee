@@ -25,3 +25,7 @@ html, body {
   font-family: "OpenSans";
   src: url(./fonts/OpenSans-Regular.ttf)
 }
+
+.rdrDefinedRangesWrapper{
+  display: none !important;
+}

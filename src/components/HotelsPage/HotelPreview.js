@@ -19,7 +19,7 @@ import axios from "axios";
 import { StyledPrompt } from "../AdminPage/StyledAdminMessages";
 import SubheadingStyle from "../general/SubheadingStyle";
 import DefaultButton from "../general/DefaultButton";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function HotelPreview({data}) {
 
@@ -82,9 +82,9 @@ export default function HotelPreview({data}) {
       const PropsText = hotel.attributes.name.slice(1);
 
       return (
-        <StyledHotelsContainer>
+        <StyledHotelsContainer key={key}>
           {showPrompt ? promptDelete : ""}
-              <StyledHotels key={key} to={`/hotel/${hotel.id}`}>
+              <StyledHotels to={`/hotel/${hotel.id}`}>
           <StyledTop>
             <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
             <StyledRestLetter>{PropsText}</StyledRestLetter>
@@ -109,8 +109,6 @@ export default function HotelPreview({data}) {
                     />
                   </StyledClose> ) : ""}
       </StyledHotelsContainer>
-
-
       );
     })
   ) : (

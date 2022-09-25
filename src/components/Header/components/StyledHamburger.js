@@ -85,7 +85,7 @@ export const StyledBars = styled.div`
   position: absolute;
   width: 40px;
   height: 5px;
-  background: black;
+  background-color: white;
   border-radius: 5px;
   transition: all 0.25s ease-in-out;
 
@@ -95,7 +95,7 @@ export const StyledBars = styled.div`
     position: absolute;
     width: 45px;
     height: 5px;
-    background: black;
+    background-color: white;
     border-radius: 5px;
     transition: all 0.25s ease-in-out;
   }

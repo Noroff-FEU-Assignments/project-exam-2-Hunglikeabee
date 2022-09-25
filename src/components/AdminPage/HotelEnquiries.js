@@ -2,7 +2,7 @@ import ApiContext from "../../context/ApiContext";
 import { useContext, useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { StyledSingleContainer, StyledName, StyledDate, StyledEmail, StyledClose } from "./StyledAdminMessages";
+import { StyledSingleContainer, StyledName, StyledDate, StyledEmail, StyledClose, StyledMessage, StyledMessagesContainer } from "./StyledAdminMessages";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,9 @@ import DefaultButton from "../general/DefaultButton";
 import { StyledPrompt } from "./StyledAdminMessages";
 import axios from "axios";
 
+import { StyledHotelMessagesContainer } from "./StyledHotelEnquiries";
+import HeadingH1Style from "../general/HeadingH1Style";
+
 export default function HotelEnquiries() {
   const [auth] = useContext(AuthContext)
   const [apiData] = useContext(ApiContext)
@@ -19,10 +22,12 @@ export default function HotelEnquiries() {
   const navigate = useNavigate()
 
   const [hotelMessages, setMessages] = useState([])
+  const [hotelName, setHotelName] = useState("Unnamed")
 
   useEffect(() => {
     if(id) {
       const getHotel = apiData.filter(hotel => parseInt(hotel.id) === parseInt(id))
+      setHotelName(getHotel[0].attributes.name)
       setMessages(getHotel[0].attributes.enquiries.data)
     }
   }, [id])
@@ -86,23 +91,38 @@ const enquiriesApi = APIURL + `api/enquiries/`
 
 
   return (
-    id ? (
-        hotelMessages.length > 0 ? hotelMessages.map((item, key) => {
+  <>
+  <HeadingH1Style>Hotel messages</HeadingH1Style>
+  {showPrompt ? promptDelete : ""}
+  <StyledMessagesContainer>
+    {id ? (<>
+      <SubheadingStyle>{hotelName ? hotelName : "Unnamed"}</SubheadingStyle>
+      {hotelMessages.length > 0 ? hotelMessages.map((item, key) => {
           return(
             <StyledSingleContainer key={key}>
                 <StyledName>Name: {item.attributes.name}</StyledName>
-                <StyledDate>From: {moment(item.attributes.from).format('MMMM Do YYYY')}</StyledDate>
-                <StyledDate>To: {moment(item.attributes.to).format('MMMM Do YYYY')}</StyledDate>
+                <StyledDate>Recieved: {moment(item.attributes.createdAt).format('MMMM Do YYYY')}</StyledDate>
+                <StyledDate>Stay from: {moment(item.attributes.from).format('MMMM Do YYYY')}</StyledDate>
+                <StyledDate>Stay to: {moment(item.attributes.to).format('MMMM Do YYYY')}</StyledDate>
                 <StyledEmail>Email: {item.attributes.email}</StyledEmail>
-                 <StyledClose>
-                      <FontAwesomeIcon onClick={() => promptModal(item.id)} icon={faTrashCan}/>
+                 <StyledClose onClick={() => promptModal(item.id)}>
+                      <FontAwesomeIcon icon={faTrashCan}/>
                 </StyledClose>
             </StyledSingleContainer>
           )
-          }).reverse() : <div>No messages</div>
-    ) : ( apiData.map((item,key)=> {
+          }).reverse() : <div>No messages</div>}
+    </>
+
+    ) : (
+    <StyledHotelMessagesContainer>
+    {apiData.map((item,key) => {
       const  id = `${item.id}`
       return <NavLink key={key} to={id}>{item.attributes.name}</NavLink>
     })
-  ))
+    }
+    </StyledHotelMessagesContainer>
+    )}
+  </StyledMessagesContainer>
+  </>
+  )
 }

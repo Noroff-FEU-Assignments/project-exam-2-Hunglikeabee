@@ -26,6 +26,7 @@ import styled from 'styled-components';
 
 const StyledMainContainer = styled.div`
 min-height: 100vh;
+margin-top: 200px;
 `
 
 

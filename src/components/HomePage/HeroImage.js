@@ -1,4 +1,3 @@
-import HeroImage from "../../images/herofixed.jpg";
 import HeadingH1Style from "../general/HeadingH1Style";
 import styled from "styled-components";
 
@@ -14,7 +13,6 @@ margin: 30px auto;
 `
 
 const StyledHero = styled.div`
-  background-image: url(${HeroImage});
   background-size: cover;
   background-position: center;
   height: 400px;
@@ -30,10 +28,10 @@ const StyledHero = styled.div`
   }
 `;
 
-export default function Hero() {
+export default function Hero(props) {
   return (
     <StyledHeroContainer>
-      <StyledHero><HeadingH1Style position="absolute" offsetRight="30%">holidaze your life</HeadingH1Style></StyledHero>
+      <StyledHero {...props}><HeadingH1Style position="absolute" offsetRight="30%">{props.children}</HeadingH1Style></StyledHero>
     </StyledHeroContainer>
   );
 }

@@ -8,7 +8,7 @@ align-items: center;
   padding: 15px;
   text-decoration: none;
   font-size: 22px;
-  color: ${props => props.theme.colors.Black}
+  color: ${props => props.theme.colors.White}
 
 }
 

@@ -19,14 +19,15 @@ align-items: center;
   background-color: white;
   text-decoration: none;
   font-size: 26px;
-  width: 200px;
+  width: 400px;
   max-width: 90vw;
   text-align: center;
   color: black;
 }
 
 & a:hover {
-  background-color: lightgreen;
+  background-color: ${props => props.theme.colors.DarkGray};
+  color: ${props => props.theme.colors.LightPink};
 }
 
 `
@@ -37,17 +38,20 @@ export default function Admin() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    document.title = "Holidaze | Admin"
     if (!auth) {
       navigate("/");
     }
   });
 
   return(
-    <StyledAdminPanel>
+    <>
     <HeadingH1Style>Admin</HeadingH1Style>
+    <StyledAdminPanel>
     <NavLink to="/addhotel">Add Hotel</NavLink>
     <NavLink to="/messages">Messages</NavLink>
     <NavLink to="/enquiries">Enquiries</NavLink>
     </StyledAdminPanel>
+    </>
   )
 }

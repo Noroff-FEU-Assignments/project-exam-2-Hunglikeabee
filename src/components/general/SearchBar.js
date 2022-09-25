@@ -43,7 +43,7 @@ const SearchNoResult = styled.div`
   padding: 20px;
 `
 
-export default function SearchBar() {
+export default function SearchBar(props) {
 
   const [search, setSearch] = useState([])
   const [searchLength, setLength] = useState([])
@@ -57,7 +57,7 @@ export default function SearchBar() {
 
   return (
     <StyledSearchContainer>
-      <StyledSearch onClick={handleSearch} onChange={handleSearch} />
+      <StyledSearch {...props} onClick={handleSearch} onChange={handleSearch} />
       {searchLength.length > 0 && search.length > 0 ?
         <SearchResultContainer>
           <SearchBarResult data={search} />

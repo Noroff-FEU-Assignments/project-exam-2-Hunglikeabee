@@ -16,6 +16,7 @@ export default function Hamburger() {
   const [hamburgerState, setHamburger] = useState(false);
 
   const handleMenu = () => {
+    scrollToTop();
     setHamburger((prev) => !prev);
   };
 
@@ -32,6 +33,10 @@ export default function Hamburger() {
   let activeStyle = {
     color: "#FF82E9",
   };
+
+  const scrollToTop = () => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }
 
   const showMenu = (
     <>
@@ -84,7 +89,7 @@ export default function Hamburger() {
 
   return (
     <StyledMenu>
-      <StyledHamburger onClick={handleMenu}>
+      <StyledHamburger onClick={() => setHamburger((prev) => !prev)}>
         <StyledBars className={hamburgerState ? "openMenu" : ""} />
       </StyledHamburger>
       {hamburgerState ? showMenu : ""}

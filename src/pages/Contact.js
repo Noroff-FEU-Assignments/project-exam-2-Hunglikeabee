@@ -12,11 +12,15 @@ import {
 import SubheadingStyle from "../components/general/SubheadingStyle";
 import { APIURL } from "../constants/APIURL";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DisplayMessage from "../components/general/DisplayMessage";
 import LoadingWheel from "../components/general/LoadingWheel";
 
 export default function Contact() {
+
+  useEffect(() => {
+    document.title = "Holidaze | Contact us"
+  }, [])
 
 
   //Form handeling and error checking
@@ -96,7 +100,7 @@ export default function Contact() {
           )}
           <StyledInput
             {...register("email")}
-            type="text"
+            type="email"
             placeholder="E-mail"
           />
           {errors.email && (

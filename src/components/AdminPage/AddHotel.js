@@ -39,7 +39,8 @@ export default function AddHotel() {
     name: yup
       .string()
       .required("Enter a title")
-      .min(3, "Needs to be atleast 3 characters"),
+      .min(3, "Needs to be atleast 3 characters")
+      .max(20, "Max lenght 20 characters"),
     description: yup
       .string()
       .required("Enter a description")
@@ -116,6 +117,13 @@ export default function AddHotel() {
 
     formData.append("files.hero", data.hero[0], data.hero[0].name);
 
+    let facilitiesId = []
+    data.minibar && facilitiesId.push(5)
+    data.bathtub && facilitiesId.push(1)
+    data.restaurant && facilitiesId.push(4)
+    data.nonsmoke && facilitiesId.push(2)
+    data.wifi && facilitiesId.push(3)
+
     formData.append(
       "data",
       JSON.stringify({
@@ -123,17 +131,17 @@ export default function AddHotel() {
         description: data.description,
         price: data.price,
         rating: data.rating,
+        facilityhotels: facilitiesId,
       })
     );
 
     try {
-      const response = await axios.post(APIURL + "api/hotels", formData, {
+      const response = await axios.post(APIURL + "api/hotels/", formData, {
         headers: {
           Authorization: `Bearer ${auth}`,
         },
       });
       setSuccess(true)
-      console.log(response);
     } catch (e) {
       console.log(e);
       setError(e.response.data.error.message);
@@ -159,10 +167,10 @@ export default function AddHotel() {
     <>
       <HeadingH1Style>ADD HOTEL</HeadingH1Style>
       <StyledForm onSubmit={handleSubmit(postHotel)}>
-        {success ? <DisplayMessage success>Hotel added</DisplayMessage> : ""}
-        {error ? <DisplayMessage>{error}</DisplayMessage> : ""}
+        {success && <DisplayMessage success>Hotel added</DisplayMessage>}
+        {error && <DisplayMessage>{error}</DisplayMessage>}
         <StyledFieldSet disabled={dataTransit}>
-          <StyledInput {...register("name")} placeholder="Name" />
+          <StyledInput type="text" {...register("name")} placeholder="Name" />
           {errors.name && (
             <DisplayMessage>{errors.name.message}</DisplayMessage>
           )}
@@ -173,11 +181,11 @@ export default function AddHotel() {
           {errors.description && (
             <DisplayMessage>{errors.description.message}</DisplayMessage>
           )}
-          <StyledInput {...register("rating")} placeholder="Hotel rating 1-5" />
+          <StyledInput type="number" {...register("rating")} placeholder="Hotel rating 1-5" />
           {errors.rating && (
             <DisplayMessage>{errors.rating.message}</DisplayMessage>
           )}
-          <StyledFieldLabel for="hero">
+          <StyledFieldLabel htmlFor="hero">
             <FontAwesomeIcon icon={faFile} />
             {heroFile ? heroFile : "Choose a hero image"}
           </StyledFieldLabel>
@@ -191,7 +199,7 @@ export default function AddHotel() {
           {errors.hero && (
             <DisplayMessage>{errors.hero.message}</DisplayMessage>
           )}
-          <StyledFieldLabel for="images">
+          <StyledFieldLabel htmlFor="images">
             <FontAwesomeIcon icon={faFile} />
             {imageFile === 1
               ? `1 file selected`
@@ -210,10 +218,20 @@ export default function AddHotel() {
           {errors.images && (
             <DisplayMessage>{errors.images.message}</DisplayMessage>
           )}
-          <StyledInput {...register("price")} placeholder="Price" />
+          <StyledInput type="number" {...register("price")} placeholder="Price" />
           {errors.price && (
             <DisplayMessage>{errors.price.message}</DisplayMessage>
           )}
+          <StyledFieldLabel>BathTub</StyledFieldLabel>
+          <input type="checkbox" {...register("bathtub") } />
+          <StyledFieldLabel>Minibar</StyledFieldLabel>
+          <input type="checkbox" {...register("minibar") } />
+          <StyledFieldLabel>Non-smoke</StyledFieldLabel>
+          <input type="checkbox" {...register("nonsmoke") } />
+          <StyledFieldLabel>Restaurant</StyledFieldLabel>
+          <input type="checkbox" {...register("restaurant") } />
+          <StyledFieldLabel>WiFi</StyledFieldLabel>
+          <input type="checkbox" {...register("wifi") } />
           {dataTransit ? <LoadingWheel/> : <StyledButton>CREATE HOTEL</StyledButton> }
         </StyledFieldSet>
       </StyledForm>

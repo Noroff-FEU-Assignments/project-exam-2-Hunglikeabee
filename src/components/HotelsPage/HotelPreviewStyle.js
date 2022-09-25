@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const StyledHotelsContainer = styled.div`
 position: relative;
 `
 
-export const StyledHotels = styled(Link)`
+export const StyledHotels = styled(NavLink)`
 position: relative;
 display: flex;
 flex-direction: column;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ApiContext from "../context/ApiContext";
 
 import HotelPreview from "../components/HotelsPage/HotelPreview";
@@ -17,10 +17,11 @@ flex-wrap: wrap;
 `
 
 export default function Hotels() {
+  useEffect(() => {
+    document.title = "Holidaze | Hotels"
+  }, [])
 
   const [apiData] = useContext(ApiContext)
-  console.log(apiData)
-
   return (
     <>
     <HeadingH1Style>Discover our hotels</HeadingH1Style>

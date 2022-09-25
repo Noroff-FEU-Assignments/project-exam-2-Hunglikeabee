@@ -34,15 +34,12 @@ export default function AdminMessages() {
 
   const getMessages = async () => {
     try {
-      console.log("here");
-      console.log(auth);
       const response = await axios.get(messagesApi, {
         headers: {
           Authorization: `Bearer ${auth}`,
         },
       });
       if (response.status === 200) {
-        console.log(response.data.data);
         setMessages(response.data.data);
       }
     } catch (e) {
@@ -122,9 +119,8 @@ export default function AdminMessages() {
                   </StyledDate>
                   <StyledEmail>Email: {item.attributes.email}</StyledEmail>
                   <StyledMessage>{item.attributes.message}</StyledMessage>
-                  <StyledClose>
+                  <StyledClose onClick={() => promptModal(item.id)}>
                     <FontAwesomeIcon
-                      onClick={() => promptModal(item.id)}
                       icon={faTrashCan}
                     />
                   </StyledClose>

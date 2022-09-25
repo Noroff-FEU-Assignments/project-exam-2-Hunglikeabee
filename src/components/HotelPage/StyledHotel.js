@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const StyledHotelContainer = styled.div`
-margin: 20px;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -9,45 +8,40 @@ align-items: center;
 
 `
 
-export const StyledHero = styled.div`
-background-position: center;
-background-size: cover;
-width: 600px;
-max-width: 100%;
-height: 400px;
-border-radius: 50px;
-`
-
-export const StyledCarousel = styled.div`
-display: flex;
-
-`
-
-export const StyledImageCarousel = styled.div`
-width: 200px;
-height: 200px;
-margin: 10px auto;
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
-`
-
-export const StyledDescription = styled.div`
-width: 400px;
-max-width: 95%;
+export const StyledHotelInfoContainer = styled.div`
 margin: 0 auto;
-height: 200px;
-border-radius: 50px;
 padding: 20px;
+text-align: center;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+box-shadow: ${props => props.theme.shading.BoxShadow};
+border-radius: 50px;
+`
+
+export const StyledTextContainer = styled.div`
+display: flex;
+flex: 1;
 background-color: white;
-`
-
-export const StyledFacilitiesContainer = styled.div`
+border-radius: 50px;
 
 `
+
+export const StyledDescriptionText = styled.p`
+margin: 20px;
+max-width: 500px;
+`
+
+
 
 export const StyledPrice = styled.div`
-
+background-color: ${props => props.theme.colors.LightYellow};
+padding: 20px;
+border-radius: 50px;
+margin: 20px;
+font-size: 30px;
 `
 
 export const StyledOrderButton = styled.button`

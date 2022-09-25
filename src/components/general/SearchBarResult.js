@@ -1,36 +1,36 @@
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-import {
-  StyledHotels,
-  StyledTop,
-  StyledImage,
-  StyledBottom,
-  StyledFirstLetter,
-  StyledRestLetter,
-} from "./SearchBarResultStyle";
+const StyledHotels = styled(NavLink)`
+border: none;
+display: flex;
+padding: 10px;
+padding-left: 30px;
+border-bottom: 1px solid gray;
+text-decoration: none;
+
+&:hover {
+  color: ${props => props.theme.colors.LightPink};
+  background-color: ${props => props.theme.colors.DarkGray};
+}
+
+&:nth-child(1) {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+&:nth-last-child(1) {
+  border-bottom: none;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+`
+
 
 export default function SearchBarResult({data}) {
-  console.log(data)
   return data.length > 0 ? (
     data.map((hotel, key) => {
-      const FirstLetter = hotel.attributes.name.charAt(0);
-      const PropsText = hotel.attributes.name.slice(1);
-
       return (
-        <StyledHotels key={key} to={`/hotel/${hotel.id}`}>
-          <StyledTop>
-            <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
-            <StyledRestLetter>{PropsText}</StyledRestLetter>
-          </StyledTop>
-          <StyledImage
-            style={{
-              backgroundImage: `url(${hotel.attributes.hero.data.attributes.formats.small.url})`,
-            }}
-          ></StyledImage>
-          <StyledBottom>
-            <div>{"STARS"}</div>
-            <div>{hotel.attributes.price}</div>
-          </StyledBottom>
-        </StyledHotels>
+        <StyledHotels key={key} to={`/hotel/${hotel.id}`}>{hotel.attributes.name}</StyledHotels>
       );
     })
   ) : (

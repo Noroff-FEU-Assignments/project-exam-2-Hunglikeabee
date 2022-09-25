@@ -9,7 +9,7 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   margin: 20px auto;
-  font-size: 36px;
+  font-size: 32px;
   border-radius: 50px;
   border: none;
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
@@ -17,6 +17,10 @@ const StyledButton = styled.button`
 
   &:hover {
     background-color: ${(props) => props.theme.colors.LightYellow};
+  }
+
+  @media (max-width: 320px) {
+    font-size: 28px;
   }
 `;
 

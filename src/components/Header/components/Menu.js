@@ -22,20 +22,24 @@ export default function Menu() {
     color: "#FF82E9"
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }
+
   return (
     <StyledMenu>
-      <NavLink style={({ isActive }) =>
+      <NavLink onClick={() => scrollToTop()} style={({ isActive }) =>
               isActive ? activeStyle : undefined
             } to="/">HOME</NavLink>
-      <NavLink style={({ isActive }) =>
+      <NavLink onClick={() => scrollToTop()} style={({ isActive }) =>
               isActive ? activeStyle : undefined
             } to="hotels">HOTELS</NavLink>
-      <NavLink style={({ isActive }) =>
+      <NavLink onClick={() => scrollToTop()} style={({ isActive }) =>
               isActive ? activeStyle : undefined
             } to="contact">CONTACT US</NavLink>
-      {auth ? <><NavLink style={({ isActive }) =>
+      {auth ? <><NavLink onClick={() => scrollToTop()} style={({ isActive }) =>
               isActive ? activeStyle : undefined
-            } to="admin">ADMIN</NavLink><LogoutButton onClick={handleLogout}>LOGOUT</LogoutButton></> : <NavLink style={({ isActive }) =>
+            } to="admin">ADMIN</NavLink><LogoutButton onClick={handleLogout}>LOGOUT</LogoutButton></> : <NavLink onClick={() => scrollToTop()} style={({ isActive }) =>
             isActive ? activeStyle : undefined
           } to="login">LOGIN</NavLink> }
     </StyledMenu>

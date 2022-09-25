@@ -98,7 +98,7 @@ export default function Footer() {
       </StyledAddressContainer>
       <StyledMapContainer>
         <SubheadingStyle>MAIN OFFICE</SubheadingStyle>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2308.711911816041!2d11.57204348502114!3d60.88360045098753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd27db360173032d6!2sChristiansfjell%20Fortress!5e0!3m2!1sen!2sno!4v1613760487502!5m2!1sen!2sno" width="300" height="250" frameborder="0" style={{border:0}} allowfullscreen="yes" aria-hidden="false" tabindex="0" title="Google Maps"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2308.711911816041!2d11.57204348502114!3d60.88360045098753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd27db360173032d6!2sChristiansfjell%20Fortress!5e0!3m2!1sen!2sno!4v1613760487502!5m2!1sen!2sno" width="250" height="250" style={{border:0}} allowFullScreen="yes" aria-hidden="false" tabIndex="0" title="Google Maps"></iframe>
       </StyledMapContainer>
       <StyledCopyright>Copyright &#169; Holidaze 2022</StyledCopyright>
     </StyledFooterContainer>

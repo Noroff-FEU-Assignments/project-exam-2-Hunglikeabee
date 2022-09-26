@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { DisplayFixedMessage } from "./DisplayMessage";
 import LoadingWheel from './LoadingWheel';
+import { Navigate } from "react-router-dom";
 
 // Requires an "enpoint" prop to the "api/endpoint/ and a "itemId" prop for the id of the endpoint
 export default function DeleteButton(props) {
@@ -32,9 +33,7 @@ export default function DeleteButton(props) {
             Authorization: `Bearer ${auth}`,
           },
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000)
+        window.location.reload(true)
       } catch (e) {
         setError(e.message)
         setDelete(false)

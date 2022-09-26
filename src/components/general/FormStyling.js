@@ -64,8 +64,11 @@ display: none;
 export const StyledFieldLabel = styled.label`
 cursor: pointer;
 color: white;
-padding: 5px;
+padding: 10px;
 margin: 10px;
+font-size: 20px;
+box-shadow: ${props => props.theme.shading.BoxShadow};
+border-radius: 50px;
 
 & * {
   margin-right: 20px;
@@ -74,6 +77,24 @@ margin: 10px;
 &:hover {
   color: ${props => props.theme.colors.LightPink}
 }
+
+& input {
+  margin: 10px;
+}
+`
+
+export const StyledFacilitiesContainer = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+max-width: 90vw;
+align-items: end;
+justify-content: left;
+margin-bottom: 30px;
+`
+
+export const StyledFacilityContainer = styled.div`
+margin: 15px;
 `
 
 export const StyledButton = styled.button`

@@ -18,22 +18,22 @@ import {
   StyledButton,
   StyledFieldLabel,
   StyledTextArea,
+  StyledFacilitiesContainer,
+  StyledFacilityContainer,
 } from "../../components/general/FormStyling";
 import HeadingH1Style from "../../components/general/HeadingH1Style";
 import LoadingWheel from "../general/LoadingWheel";
+import useCheckAuth from "../../hooks/useCheckAuth";
+import SubheadingStyle from "../general/SubheadingStyle";
+import GetHotelApi from "../../hooks/useApiCall";
 
 export default function AddHotel() {
-  const navigate = useNavigate();
   const [auth, setAuth] = useContext(AuthContext);
   const [dataTransit, setDataTransit] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false)
 
-  useEffect(() => {
-    if (!auth) {
-      navigate("/");
-    }
-  });
+  useCheckAuth();
 
   const schema = yup.object().shape({
     name: yup
@@ -48,13 +48,13 @@ export default function AddHotel() {
     rating: yup
       .number()
       .required("Enter a rating between 1-5")
-      .min(1, "Needs to be atleast 1")
-      .max(5, "Max rating is 5"),
+      .typeError("Must be a valid number")
+      .oneOf([1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5], "Must be one of: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 "),
     hero: yup
       .mixed()
       .required("You need to add a image")
-      .test("fileSize", "The file is too large", (value) => {
-        return value && value[0].size < 10000000;
+      .test("fileSize", "The file is too large, max 10MB", (value) => {
+        return value[0].size ? value[0].size < 10000000 : "";
       })
       .test(
         "type",
@@ -71,8 +71,8 @@ export default function AddHotel() {
     images: yup
       .mixed()
       .required("You need to add a image")
-      .test("fileSize", "The file is too large, max 10MB", (value) => {
-       return value && value[0].size < 10000000;
+      .test("fileSize", "The files are too large, max 10MB each file", (value) => {
+       return value[0].size ? value[0].size < 10000000 : "";
       })
       .test(
         "type",
@@ -102,27 +102,46 @@ export default function AddHotel() {
     resolver: yupResolver(schema),
   });
 
+
+  const [heroFile, setHero] = useState(null);
+  const [imageFile, setImage] = useState(null);
+
+  const handleHeroFile = (e) => {
+    console.log(e);
+    setHero(e.target.files[0].name);
+  };
+
+  const handleImageFile = (e) => {
+    setImage(e.target.files.length);
+  };
+
+
+  const [allFacilities, setFacilities]  = useState(null)
+
+  useEffect(() => {
+    const hotelFacilities = async () => {
+      const response = await axios.get(APIURL + `api/facilities?populate=*`)
+      const theFacilities = response.data.data
+      setFacilities(theFacilities)
+     }
+     hotelFacilities();
+  }, [])
+
+
   const postHotel = async (data) => {
-    console.log(data);
     setSuccess(false)
     setDataTransit(true);
     setError(null);
     const formData = new FormData();
 
-
-
     for(let i = 0; i < data.images.length; i++) {
       formData.append("files.images", data.images[i], data.images[i].name)
     }
-
     formData.append("files.hero", data.hero[0], data.hero[0].name);
-
     let facilitiesId = []
-    data.minibar && facilitiesId.push(5)
-    data.bathtub && facilitiesId.push(1)
-    data.restaurant && facilitiesId.push(4)
-    data.nonsmoke && facilitiesId.push(2)
-    data.wifi && facilitiesId.push(3)
+    allFacilities.forEach(item => {
+      data[item.attributes.facility] && facilitiesId.push(parseInt(item.id))
+    })
 
     formData.append(
       "data",
@@ -151,18 +170,6 @@ export default function AddHotel() {
     }
   };
 
-  const [heroFile, setHero] = useState(null);
-  const [imageFile, setImage] = useState(null);
-
-  const handleHeroFile = (e) => {
-    console.log(e);
-    setHero(e.target.files[0].name);
-  };
-
-  const handleImageFile = (e) => {
-    setImage(e.target.files.length);
-  };
-
   return (
     <>
       <HeadingH1Style>ADD HOTEL</HeadingH1Style>
@@ -181,7 +188,7 @@ export default function AddHotel() {
           {errors.description && (
             <DisplayMessage>{errors.description.message}</DisplayMessage>
           )}
-          <StyledInput type="number" {...register("rating")} placeholder="Hotel rating 1-5" />
+          <StyledInput step="0.5" type="number" {...register("rating")} placeholder="Hotel rating 1-5" />
           {errors.rating && (
             <DisplayMessage>{errors.rating.message}</DisplayMessage>
           )}
@@ -222,16 +229,16 @@ export default function AddHotel() {
           {errors.price && (
             <DisplayMessage>{errors.price.message}</DisplayMessage>
           )}
-          <StyledFieldLabel>BathTub</StyledFieldLabel>
-          <input type="checkbox" {...register("bathtub") } />
-          <StyledFieldLabel>Minibar</StyledFieldLabel>
-          <input type="checkbox" {...register("minibar") } />
-          <StyledFieldLabel>Non-smoke</StyledFieldLabel>
-          <input type="checkbox" {...register("nonsmoke") } />
-          <StyledFieldLabel>Restaurant</StyledFieldLabel>
-          <input type="checkbox" {...register("restaurant") } />
-          <StyledFieldLabel>WiFi</StyledFieldLabel>
-          <input type="checkbox" {...register("wifi") } />
+          <SubheadingStyle>Facilities</SubheadingStyle>
+          <StyledFacilitiesContainer>
+            {allFacilities && allFacilities.map((facility,key) => {
+              return <StyledFacilityContainer key={key}>
+                        <StyledFieldLabel>{facility.attributes.facility}
+                        <input type="checkbox" {...register(`${facility.attributes.facility}`) } />
+                        </StyledFieldLabel>
+                      </StyledFacilityContainer>
+            })}
+          </StyledFacilitiesContainer>
           {dataTransit ? <LoadingWheel/> : <StyledButton>CREATE HOTEL</StyledButton> }
         </StyledFieldSet>
       </StyledForm>

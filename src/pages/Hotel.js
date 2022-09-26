@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import ApiContext from "../context/ApiContext";
 import {
@@ -130,9 +130,10 @@ export default function Hotel() {
       <ImagesCarousel images={hotelImages} />
       <StyledHotelInfoContainer>
         <StyledTextContainer>
-        <StyledDescriptionText>
-          {thisHotel[0].attributes.description}
-        </StyledDescriptionText>
+          <SubheadingStyle>Information</SubheadingStyle>
+          <StyledDescriptionText>
+            {thisHotel[0].attributes.description}
+          </StyledDescriptionText>
         </StyledTextContainer>
         <Facilities hotelId={id} />
       </StyledHotelInfoContainer>

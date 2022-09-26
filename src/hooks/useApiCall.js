@@ -1,9 +1,11 @@
 import axios from "axios"
 import ApiContext from "../context/ApiContext"
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
-export default async function GetHotelApi() {
+export default function GetHotelApi() {
     const [apiData, setApi] = useContext(ApiContext)
+    useEffect(() => {
+        const getApi = async () => {
             try {
                 const fetchApi = await axios.get(`https://exam-year2-api.herokuapp.com/api/hotels?populate=*`)
                 setApi(fetchApi.data.data)
@@ -11,4 +13,7 @@ export default async function GetHotelApi() {
             catch(e) {
                 console.log(e)
             }
+        }
+        getApi();
+    }, [])
 }

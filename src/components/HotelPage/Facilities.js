@@ -5,7 +5,7 @@ import { useContext, useState, useEffect } from "react";
 import ApiContext from "../../context/ApiContext";
 import SubheadingStyle from "../general/SubheadingStyle";
 
-const StyledSomething = styled.div`
+const StyledIcon = styled.div`
 width: 30px;
 height: 30px;
 margin-right: 20px;
@@ -14,7 +14,7 @@ margin-right: 20px;
 const StyledFacilities = styled.div`
 display: flex;
 flex-direction: column;
-
+min-width: 250px;
 `;
 
 const StyledFacility = styled.div`
@@ -55,7 +55,7 @@ export default function Facilities({hotelId}) {
               console.log(oneFacility)
               return (
                 <StyledFacility key={key}>
-                <StyledSomething style={{backgroundImage: `url(${oneFacility[0].attributes.facilityicon.data.attributes.url})`}}></StyledSomething>
+                <StyledIcon style={{backgroundImage: `url(${oneFacility[0].attributes.facilityicon.data.attributes.url})`}}></StyledIcon>
                     <div>{oneFacility[0].attributes.facility}</div>
                 </StyledFacility>
 

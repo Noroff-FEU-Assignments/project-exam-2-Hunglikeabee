@@ -9,72 +9,13 @@ import {
   StyledRestLetter,
 } from "./HotelPreviewStyle";
 import ShowStarsRating from './../general/ShowStarsRating';
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { StyledClose } from "../AdminPage/StyledAdminMessages";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { APIURL } from "../../constants/APIURL";
-import axios from "axios";
-import { StyledPrompt } from "../AdminPage/StyledAdminMessages";
-import SubheadingStyle from "../general/SubheadingStyle";
-import DefaultButton from "../general/DefaultButton";
-import { useNavigate } from "react-router-dom";
+import DeleteButton from "../general/DeleteButton";
 
 export default function HotelPreview({data}) {
 
   const [auth, setAuth] = useContext(AuthContext);
-
-  const [showPrompt, setPromptShow] = useState(false);
-  const [hotelId, setHotelId] = useState(null);
-
-  const promptModal = (id) => {
-    setPromptShow(true);
-    setHotelId(id);
-  };
-
-  const handleAccept = () => {
-    handleDelete(hotelId);
-    setPromptShow(false);
-  };
-
-  const handleCancel = () => {
-    setPromptShow(false);
-  };
-
-  const navigate = useNavigate();
-
-  const messagesApi = APIURL + "api/hotels/";
-  const handleDelete = (hotelId) => {
-    const deleteApi = messagesApi + hotelId;
-    const tryDelete = async () => {
-      try {
-        const response = await axios.delete(deleteApi, {
-          headers: {
-            Authorization: `Bearer ${auth}`,
-          },
-        });
-        console.log(response);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        navigate("/")
-      }
-    };
-    tryDelete();
-  };
-
-  const promptDelete = (
-    <StyledPrompt role="alert">
-      <SubheadingStyle>Delete?</SubheadingStyle>
-      <div>
-        <DefaultButton onClick={() => handleAccept(hotelId)}>
-          Accept
-        </DefaultButton>
-        <DefaultButton onClick={() => handleCancel()}>Cancel</DefaultButton>
-      </div>
-    </StyledPrompt>
-  );
 
   return data.length > 0 ? (
     data.map((hotel, key) => {
@@ -83,7 +24,6 @@ export default function HotelPreview({data}) {
 
       return (
         <StyledHotelsContainer key={key}>
-          {showPrompt ? promptDelete : ""}
               <StyledHotels to={`/hotel/${hotel.id}`}>
           <StyledTop>
             <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
@@ -102,12 +42,7 @@ export default function HotelPreview({data}) {
           </StyledBottom>
 
         </StyledHotels>
-        {auth ? (<StyledClose>
-                    <FontAwesomeIcon
-                      onClick={() => promptModal(hotel.id)}
-                      icon={faTrashCan}
-                    />
-                  </StyledClose> ) : ""}
+        {auth ? (<DeleteButton endpoint="api/hotels/" itemId={hotel.id} /> ) : ""}
       </StyledHotelsContainer>
       );
     })

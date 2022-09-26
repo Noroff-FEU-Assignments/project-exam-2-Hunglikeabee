@@ -5,20 +5,16 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   StyledMessagesContainer,
-  StyledPrompt,
   StyledSingleContainer,
   StyledName,
   StyledDate,
   StyledEmail,
   StyledMessage,
-  StyledClose,
 } from "./StyledAdminMessages";
-import SubheadingStyle from "./../general/SubheadingStyle";
-import DefaultButton from "../general/DefaultButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import HeadingH1Style from "./../general/HeadingH1Style";
+import useCheckAuth from "../../hooks/useCheckAuth";
+import DeleteButton from "../general/DeleteButton";
 
 export default function AdminMessages() {
   const navigate = useNavigate();
@@ -26,11 +22,7 @@ export default function AdminMessages() {
   const [messages, setMessages] = useState([]);
   const messagesApi = APIURL + "api/contactforms/";
 
-  useEffect(() => {
-    if (!auth) {
-      navigate("/");
-    }
-  });
+  useCheckAuth();
 
   const getMessages = async () => {
     try {
@@ -44,69 +36,18 @@ export default function AdminMessages() {
       }
     } catch (e) {
       console.log(e);
-    } finally {
-      console.log("YAY");
     }
   };
 
   useEffect(() => {
     getMessages();
-  }, [auth]);
-
-  const [showPrompt, setPromptShow] = useState(false);
-  const [messageId, setMessageId] = useState(null);
-
-  const promptModal = (id) => {
-    setPromptShow(true);
-    setMessageId(id);
-  };
-
-  const handleAccept = () => {
-    handleDelete(messageId);
-    setPromptShow(false);
-  };
-
-  const handleCancel = () => {
-    setPromptShow(false);
-  };
-
-  const promptDelete = (
-    <StyledPrompt role="alert">
-      <SubheadingStyle>Delete?</SubheadingStyle>
-      <div>
-        <DefaultButton onClick={() => handleAccept(messageId)}>
-          Accept
-        </DefaultButton>
-        <DefaultButton onClick={() => handleCancel()}>Cancel</DefaultButton>
-      </div>
-    </StyledPrompt>
-  );
-
-  const handleDelete = (messageId) => {
-    const deleteApi = messagesApi + messageId;
-    const tryDelete = async () => {
-      try {
-        const response = await axios.delete(deleteApi, {
-          headers: {
-            Authorization: `Bearer ${auth}`,
-          },
-        });
-        console.log(response);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        getMessages();
-      }
-    };
-    tryDelete();
-  };
+  }, []);
 
   return (
     <>
       <HeadingH1Style>Admin messages</HeadingH1Style>
       <StyledMessagesContainer>
-        {showPrompt ? promptDelete : ""}
-        {messages.length > 0 ? (
+        {messages ? (
           messages
             .map((item, key) => {
               return (
@@ -119,17 +60,13 @@ export default function AdminMessages() {
                   </StyledDate>
                   <StyledEmail>Email: {item.attributes.email}</StyledEmail>
                   <StyledMessage>{item.attributes.message}</StyledMessage>
-                  <StyledClose onClick={() => promptModal(item.id)}>
-                    <FontAwesomeIcon
-                      icon={faTrashCan}
-                    />
-                  </StyledClose>
+                  <DeleteButton endpoint="api/contactforms/" itemId={item.id} />
                 </StyledSingleContainer>
               );
             })
             .reverse()
         ) : (
-          <div>No messages</div>
+          <StyledSingleContainer>No messages</StyledSingleContainer>
         )}
       </StyledMessagesContainer>
     </>

@@ -29,7 +29,6 @@ min-height: 100vh;
 margin-top: 200px;
 `
 
-
 const MainTheme = {
   colors: {
     LightPink: "#FF82E9",

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import ApiContext from "../context/ApiContext";
-
 import HotelPreview from "../components/HotelsPage/HotelPreview";
 import HeadingH1Style from "../components/general/HeadingH1Style";
+import GetHotelApi from "../hooks/useApiCall";
 
 const HotelsContainer = styled.div`
 max-width: 1000px;
@@ -17,11 +17,11 @@ flex-wrap: wrap;
 `
 
 export default function Hotels() {
+  const [apiData] = useContext(ApiContext)
   useEffect(() => {
     document.title = "Holidaze | Hotels"
   }, [])
-
-  const [apiData] = useContext(ApiContext)
+  GetHotelApi();
   return (
     <>
     <HeadingH1Style>Discover our hotels</HeadingH1Style>

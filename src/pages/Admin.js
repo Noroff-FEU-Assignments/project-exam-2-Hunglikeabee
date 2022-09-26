@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import styled from "styled-components";
+import useCheckAuth from "../hooks/useCheckAuth";
 
 const StyledAdminPanel = styled.div`
 display: flex;
@@ -37,11 +38,11 @@ export default function Admin() {
   const [auth, setAuth] = useContext(AuthContext)
   const navigate = useNavigate()
 
+
+  useCheckAuth();
+
   useEffect(() => {
     document.title = "Holidaze | Admin"
-    if (!auth) {
-      navigate("/");
-    }
   });
 
   return(

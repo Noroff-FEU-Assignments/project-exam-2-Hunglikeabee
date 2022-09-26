@@ -5,33 +5,35 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-
 `
 
 export const StyledHotelInfoContainer = styled.div`
-margin: 0 auto;
+margin: 40px auto;
 padding: 20px;
 text-align: center;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-justify-content: center;
+flex-direction: column;
+justify-content: flex-start;
 align-items: center;
 box-shadow: ${props => props.theme.shading.BoxShadow};
 border-radius: 50px;
+width: 1000px;
+max-width: 95vw;
 `
 
 export const StyledTextContainer = styled.div`
-display: flex;
+flex-direction: column;
+justify-content: flex-start;
 flex: 1;
-background-color: white;
-border-radius: 50px;
-
+max-width: 600px;
 `
 
 export const StyledDescriptionText = styled.p`
-margin: 20px;
-max-width: 500px;
+padding: 40px 20px;
+background-color: white;
+border-radius: 50px;
 `
 
 
@@ -44,9 +46,6 @@ margin: 20px;
 font-size: 30px;
 `
 
-export const StyledOrderButton = styled.button`
-
-`
 
 export const StyledCloseButton = styled.div`
 background-color: lightcoral;

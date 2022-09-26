@@ -4,8 +4,10 @@ import ReactImageGallery from "react-image-gallery"
 
 
 const StyledGallery = styled(ReactImageGallery)`
-`
-
+& * {
+  height: 250px !important;
+}
+  `
 
 export default function ImagesCarousel({images}) {
 
@@ -13,8 +15,8 @@ export default function ImagesCarousel({images}) {
 
   const imageTest = images.map(image => {
        return ({
-        original: image.attributes.formats.medium.url,
-        thumbnail: image.attributes.formats.medium.url,
+        original: image.attributes.formats.medium.url ? image.attributes.formats.medium.url : image.attributes.formats.small.url,
+        thumbnail: image.attributes.formats.small.url,
       })
     })
 

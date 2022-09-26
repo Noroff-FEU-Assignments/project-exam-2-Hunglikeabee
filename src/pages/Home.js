@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import Paragraph from "../components/general/Paragraph"
 import SearchBar from "../components/general/SearchBar"
+import Activities from "../components/HomePage/Activities";
 import Hero from "../components/HomePage/HeroImage"
 import HeroImage from "../images/herofixed.jpg";
 
@@ -17,6 +18,7 @@ export default function Home() {
         }}>holidaze your life</Hero>
         <Paragraph>"Where your dreams and our vision meet!"</Paragraph>
         <SearchBar placeholder="Find hotel..." />
+        <Activities />
         </>
     )
 }

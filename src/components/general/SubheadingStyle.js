@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const StyledHeading = styled.div`
   font-size: 26px;
-  margin-top: 40px;
   max-width: 90vw;
   display: flex;
   justify-content: center;

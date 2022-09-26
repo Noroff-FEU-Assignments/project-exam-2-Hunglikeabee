@@ -7,7 +7,7 @@ import LogoLetter from "../../../images/logo/holidazelogobigh.png"
 const StyledLink = styled(Link)``
 
 const StyledLogo = styled.div`
-width: 200px;
+width: 160px;
 height: 80px;
 margin-left: 20px;
 background-image: url(${LogoLarge});
@@ -16,7 +16,7 @@ background-position: center;
 background-repeat: no-repeat;
 
 @media (max-width: 450px) {
-  width: 150px;
+  width: 140px;
 }
 
 @media (max-width: 280px) {

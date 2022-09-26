@@ -36,11 +36,9 @@ export default function Hotel() {
   const [apiData] = useContext(ApiContext);
   const { id } = useParams();
   const thisHotel = apiData.filter((item) => item.id === parseInt(id));
-
   const hotelImages = thisHotel[0].attributes.images.data.map((item) => {
     return item;
   });
-
   const [orderModal, setOrderModal] = useState(false);
 
   const handleOrderModal = () => {

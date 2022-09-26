@@ -6,7 +6,7 @@ const StyledMessage = styled.div`
   border-radius: 50px;
   background-color: ${props => props.error ? "lightcoral" : props.success ? "lightgreen" : props.warning ? "yellow" : "lightcoral"};
   font-size: 18px;
-  padding: 2px;
+  padding: 10px;
   text-align: center;
   margin: 0px auto;
 `;

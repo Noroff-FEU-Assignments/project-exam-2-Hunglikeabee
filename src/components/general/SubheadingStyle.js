@@ -9,6 +9,7 @@ const StyledHeading = styled.div`
   height: 80px;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0 auto;
 
   @media (max-width: 600px) {
     font-size: 20px;

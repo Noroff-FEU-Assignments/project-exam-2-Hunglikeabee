@@ -64,7 +64,12 @@ export default function Login() {
         navigate("/admin");
       }
     } catch (e) {
-      setError(e.message);
+      if(e.request.status === 400) {
+        setError("Invalid username or password")
+      }
+      else {
+        setError(e.message);
+      }
     } finally {
       setLoggingInn(false);
     }

@@ -25,6 +25,7 @@ margin: 20px;
 border-radius: 50px;
 &:hover button {
   color: ${props => props.theme.colors.LightPink};
+  background-color: ${props => props.theme.colors.Black};
 }
 `
 

@@ -40,10 +40,10 @@ border-radius: 50px;
 
 export const StyledPrice = styled.div`
 background-color: ${props => props.theme.colors.LightYellow};
-padding: 20px;
+padding: 10px;
 border-radius: 50px;
 margin: 20px;
-font-size: 30px;
+font-size: 24px;
 `
 
 

@@ -5,10 +5,11 @@ const StyledHeroContainer = styled.div`
 position: relative;
 display: flex;
 justify-content: end;
-height: 400px;
+height: 450px;
 width: 100%;
 max-width: 800px;
 margin: 30px auto;
+
 
 `
 
@@ -21,6 +22,9 @@ const StyledHero = styled.div`
   margin-right: 10px;
   margin-left: 10px;
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
+  @media (max-width: 500px) {
+  height: 350px;
+}
 
   @media (max-width: 600px) {
     border-radius: 0px;

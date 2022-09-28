@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons"
 
 const StyledBulbContainer = styled.div`
-width: 30px;
-height: 30px;
+width: 40px;
+height: 40px;
 color: yellow;
 position: fixed;
 bottom: 10px;
@@ -16,6 +16,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 border-radius: 50px;
+z-index: 9001
 `
 
 export default function LightDarkMode(props) {

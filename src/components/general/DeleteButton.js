@@ -32,7 +32,7 @@ export default function DeleteButton(props) {
             Authorization: `Bearer ${auth}`,
           },
         });
-        window.location.reload(true);
+        window.location.reload();
       } catch (e) {
         setError(e.message);
         setDelete(false);

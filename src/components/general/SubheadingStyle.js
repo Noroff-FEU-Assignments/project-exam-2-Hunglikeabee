@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledHeading = styled.div`
+export const StyledHeading = styled.div`
   font-size: 26px;
   max-width: 90vw;
   display: flex;
@@ -20,22 +20,10 @@ const StyledHeading = styled.div`
   }
 `;
 
-const StyledFirstLetter = styled.h2`
+export const StyledFirstLetter = styled.h2`
   color: ${(props) => props.theme.colors.LightPink};
 `;
 
-const StyledRestLetter = styled.h2`
+export const StyledRestLetter = styled.h2`
   color: ${(props) => props.theme.colors.White};
 `;
-
-export default function SubheadingStyle(props) {
-  const FirstLetter = props.children.charAt(0);
-  const PropsText = props.children.slice(1);
-
-  return (
-    <StyledHeading {...props}>
-      <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
-      <StyledRestLetter>{PropsText}</StyledRestLetter>
-    </StyledHeading>
-  );
-}

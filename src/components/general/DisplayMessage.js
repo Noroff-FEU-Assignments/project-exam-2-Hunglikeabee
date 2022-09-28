@@ -4,7 +4,14 @@ const StyledMessage = styled.div`
   width: 500px;
   max-width: 90%;
   border-radius: 50px;
-  background-color: ${props => props.error ? "lightcoral" : props.success ? "lightgreen" : props.warning ? "yellow" : "lightcoral"};
+  background-color: ${(props) =>
+    props.error
+      ? "lightcoral"
+      : props.success
+      ? "lightgreen"
+      : props.warning
+      ? "yellow"
+      : "lightcoral"};
   font-size: 18px;
   padding: 10px;
   text-align: center;
@@ -19,18 +26,23 @@ const StyledFixedMessage = styled.div`
   transform: translateX(-50%);
   max-width: 90%;
   border-radius: 50px;
-  background-color: ${props => props.error ? "lightcoral" : props.success ? "lightgreen" : props.warning ? "yellow" : "lightcoral"};
+  background-color: ${(props) =>
+    props.error
+      ? "lightcoral"
+      : props.success
+      ? "lightgreen"
+      : props.warning
+      ? "yellow"
+      : "lightcoral"};
   font-size: 18px;
   padding: 20px;
   text-align: center;
-`
-
+`;
 
 export default function DisplayMessage(props) {
-  return <StyledMessage{...props}>{props.children}</StyledMessage>;
+  return <StyledMessage {...props}>{props.children}</StyledMessage>;
 }
 
-
 export function DisplayFixedMessage(props) {
-  return <StyledFixedMessage{...props}>{props.children}</StyledFixedMessage>;
+  return <StyledFixedMessage {...props}>{props.children}</StyledFixedMessage>;
 }

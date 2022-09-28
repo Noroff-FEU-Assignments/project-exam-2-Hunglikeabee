@@ -9,37 +9,36 @@ import {
   StyledTextArea,
   StyledButton,
 } from "../components/general/FormStyling";
-import SubheadingStyle from "../components/general/SubheadingStyle";
+import Subheading from "../components/general/Subheading";
 import { APIURL } from "../constants/APIURL";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import DisplayMessage from "../components/general/DisplayMessage";
 import LoadingWheel from "../components/general/LoadingWheel";
 
+//Form handeling and error checking
+
+const schema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Enter your name")
+    .min(3, "Needs to be atleast 3 characters"),
+  email: yup
+    .string()
+    .required("Enter your email")
+    .email("Enter a valid email: example@mail.com"),
+  message: yup
+    .string()
+    .required("Enter your message")
+    .min(10, "Message needs to be atleast 10 characters"),
+});
+
+
 export default function Contact() {
-
   useEffect(() => {
-    document.title = "Holidaze | Contact us"
-  }, [])
+    document.title = "Holidaze | Contact us";
+  }, []);
 
-
-  //Form handeling and error checking
-  const emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-  const contactApi = APIURL + "api/contactforms";
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .required("Enter your name")
-      .min(3, "Needs to be atleast 3 characters"),
-    email: yup
-      .string()
-      .required("Enter your email")
-      .matches(emailRegEx, "Enter a valid email: example@mail.com"),
-    message: yup
-      .string()
-      .required("Enter your message")
-      .min(10, "Message needs to be atleast 10 characters"),
-  });
   const {
     register,
     handleSubmit,
@@ -49,14 +48,13 @@ export default function Contact() {
     resolver: yupResolver(schema),
   });
 
-
   //States for the form
   const [contactSend, setContactSend] = useState(false);
   const [error, setError] = useState(null);
   const [messageSuccessful, setSuccessful] = useState(false);
 
-
   //Attempt to send the contact form to the api
+  const contactApi = APIURL + "api/contactforms";
   const sendContact = async (data) => {
     setContactSend(true);
     setError(null);
@@ -88,10 +86,12 @@ export default function Contact() {
       <HeadingH1Style>Contact us</HeadingH1Style>
       <StyledForm onSubmit={handleSubmit(sendContact)}>
         <StyledFieldSet disabled={contactSend}>
-          <SubheadingStyle>Send us a message</SubheadingStyle>
+          <Subheading>Send us a message</Subheading>
           {messageSuccessful ? (
             <DisplayMessage success>Message sendt</DisplayMessage>
-          ) : error ? <DisplayMessage error>{error}</DisplayMessage> : (
+          ) : error ? (
+            <DisplayMessage error>{error}</DisplayMessage>
+          ) : (
             ""
           )}
           <StyledInput {...register("name")} type="text" placeholder="Name" />

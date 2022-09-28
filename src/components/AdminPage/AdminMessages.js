@@ -12,7 +12,7 @@ import {
   StyledMessage,
 } from "./StyledAdminMessages";
 import moment from "moment";
-import HeadingH1Style from "./../general/HeadingH1Style";
+import HeadingH1Style from "../general/HeadingH1Style";
 import useCheckAuth from "../../hooks/useCheckAuth";
 import DeleteButton from "../general/DeleteButton";
 

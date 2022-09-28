@@ -22,10 +22,9 @@ import {
 import LoadingWheel from "../components/general/LoadingWheel";
 
 export default function Login() {
-
   useEffect(() => {
-    document.title = "Holidaze | Login"
-  }, [])
+    document.title = "Holidaze | Login";
+  }, []);
 
   const navigate = useNavigate();
   const loginUrl = APIURL + "api/auth/local";
@@ -64,10 +63,9 @@ export default function Login() {
         navigate("/admin");
       }
     } catch (e) {
-      if(e.request.status === 400) {
-        setError("Invalid username or password")
-      }
-      else {
+      if (e.request.status === 400) {
+        setError("Invalid username or password");
+      } else {
         setError(e.message);
       }
     } finally {

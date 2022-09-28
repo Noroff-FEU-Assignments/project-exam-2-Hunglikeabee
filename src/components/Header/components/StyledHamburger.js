@@ -24,19 +24,19 @@ export const StyledShowMenu = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: black;
+  background-color: ${(props) => props.theme.colors.Black};
   justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
   border-radius: 50px;
-  box-shadow: ${props => props.theme.shading.BoxShadow};
+  box-shadow: ${(props) => props.theme.shading.BoxShadow};
 
   & a {
     padding: 5px;
     font-size: 22px;
-    background-color: black;
-    color: white;
+    background-color: ${(props) => props.theme.colors.Black};
+    color: ${(props) => props.theme.colors.White};
     text-decoration: none;
   }
 
@@ -72,12 +72,12 @@ export const StyledHamburger = styled.div`
 
   & .openMenu::before {
     transform: rotate(45deg);
-    background-color: ${props => props.theme.colors.LightPink};
+    background-color: ${(props) => props.theme.colors.LightPink};
   }
 
   & .openMenu::after {
     transform: rotate(-45deg);
-    background-color: ${props => props.theme.colors.White};
+    background-color: ${(props) => props.theme.colors.White};
   }
 `;
 
@@ -85,7 +85,7 @@ export const StyledBars = styled.div`
   position: absolute;
   width: 40px;
   height: 5px;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.White};
   border-radius: 5px;
   transition: all 0.25s ease-in-out;
 
@@ -95,7 +95,7 @@ export const StyledBars = styled.div`
     position: absolute;
     width: 45px;
     height: 5px;
-    background-color: white;
+    background-color: ${(props) => props.theme.colors.White};
     border-radius: 5px;
     transition: all 0.25s ease-in-out;
   }

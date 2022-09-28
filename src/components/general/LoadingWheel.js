@@ -43,7 +43,7 @@ export default function LoadingWheel() {
         linecolor="lightcoral"
         location="top"
         duration="1.5s"
-        timing="ease-out"
+        timing="linear"
       />
       <LoadingLine
         linecolor="lightblue"

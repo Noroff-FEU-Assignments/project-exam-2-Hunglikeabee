@@ -14,15 +14,15 @@ const StyledHeading = styled.div`
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
   white-space: nowrap;
   overflow: hidden;
-  position: ${props => props.position ? props.position : "relative"};
-  right: ${props => props.offsetRight ? props.offsetRight : ""};
+  position: ${(props) => (props.position ? props.position : "relative")};
+  right: ${(props) => (props.offsetRight ? props.offsetRight : "")};
 
   @media (max-width: 700px) {
     border-radius: 0 50px 50px 0;
     font-size: 18px;
     margin-left: 0px;
     left: 0%;
-    position: ${props => props.position ? props.position : "relative"};
+    position: ${(props) => (props.position ? props.position : "relative")};
   }
 
   @media (max-width: 300px) {
@@ -38,7 +38,7 @@ const StyledFirstLetter = styled.h1`
 `;
 
 const StyledRestLetter = styled.h1`
-  color: ${(props) => props.theme.colors.Black};
+  color: black;
 `;
 
 export default function HeadingH1Style(props) {

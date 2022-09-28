@@ -8,13 +8,12 @@ import {
   StyledFirstLetter,
   StyledRestLetter,
 } from "./HotelPreviewStyle";
-import ShowStarsRating from './../general/ShowStarsRating';
+import ShowStarsRating from "../general/ShowStarsRating";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import DeleteButton from "../general/DeleteButton";
 
-export default function HotelPreview({data}) {
-
+export default function HotelPreview({ data }) {
   const [auth, setAuth] = useContext(AuthContext);
 
   return data.length > 0 ? (
@@ -24,26 +23,31 @@ export default function HotelPreview({data}) {
 
       return (
         <StyledHotelsContainer key={key}>
-              <StyledHotels to={`/hotel/${hotel.id}`}>
-          <StyledTop>
-            <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
-            <StyledRestLetter>{PropsText}</StyledRestLetter>
-          </StyledTop>
-          <StyledImage
-            style={{
-              backgroundImage: `url(${hotel.attributes.hero.data ? hotel.attributes.hero.data.attributes.formats.small.url : ""})`
-            }}
-          ></StyledImage>
-          <StyledBottom>
-            <div>
-              {ShowStarsRating(hotel.attributes.rating)}
-            </div>
-            <div>{hotel.attributes.price}</div>
-          </StyledBottom>
-
-        </StyledHotels>
-        {auth ? (<DeleteButton endpoint="api/hotels/" itemId={hotel.id} /> ) : ""}
-      </StyledHotelsContainer>
+          <StyledHotels to={`/hotel/${hotel.id}`}>
+            <StyledTop>
+              <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
+              <StyledRestLetter>{PropsText}</StyledRestLetter>
+            </StyledTop>
+            <StyledImage
+              style={{
+                backgroundImage: `url(${
+                  hotel.attributes.hero.data
+                    ? hotel.attributes.hero.data.attributes.formats.small.url
+                    : ""
+                })`,
+              }}
+            ></StyledImage>
+            <StyledBottom>
+              <div>{ShowStarsRating(hotel.attributes.rating)}</div>
+              <div>{hotel.attributes.price}</div>
+            </StyledBottom>
+          </StyledHotels>
+          {auth ? (
+            <DeleteButton endpoint="api/hotels/" itemId={hotel.id} />
+          ) : (
+            ""
+          )}
+        </StyledHotelsContainer>
       );
     })
   ) : (

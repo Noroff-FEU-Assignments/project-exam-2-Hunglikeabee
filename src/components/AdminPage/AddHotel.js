@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import DisplayMessage from "../../components/general/DisplayMessage";
-import { APIURL } from "../../constants/APIURL"
+import DisplayMessage from "../general/DisplayMessage";
+import { APIURL } from "../../constants/APIURL";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
@@ -20,18 +20,18 @@ import {
   StyledTextArea,
   StyledFacilitiesContainer,
   StyledFacilityContainer,
-} from "../../components/general/FormStyling";
-import HeadingH1Style from "../../components/general/HeadingH1Style";
+} from "../general/FormStyling";
+import HeadingH1Style from "../general/HeadingH1Style";
 import LoadingWheel from "../general/LoadingWheel";
 import useCheckAuth from "../../hooks/useCheckAuth";
-import SubheadingStyle from "../general/SubheadingStyle";
+import Subheading from "../general/Subheading";
 import GetHotelApi from "../../hooks/useApiCall";
 
 export default function AddHotel() {
   const [auth, setAuth] = useContext(AuthContext);
   const [dataTransit, setDataTransit] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
 
   useCheckAuth();
 
@@ -49,7 +49,10 @@ export default function AddHotel() {
       .number()
       .required("Enter a rating between 1-5")
       .typeError("Must be a valid number")
-      .oneOf([1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5], "Must be one of: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 "),
+      .oneOf(
+        [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+        "Must be one of: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 "
+      ),
     hero: yup
       .mixed()
       .required("You need to add a image")
@@ -71,9 +74,13 @@ export default function AddHotel() {
     images: yup
       .mixed()
       .required("You need to add a image")
-      .test("fileSize", "The files are too large, max 10MB each file", (value) => {
-       return value[0].size ? value[0].size < 10000000 : "";
-      })
+      .test(
+        "fileSize",
+        "The files are too large, max 10MB each file",
+        (value) => {
+          return value[0].size ? value[0].size < 10000000 : "";
+        }
+      )
       .test(
         "type",
         "Only the following formats are accepted: .jpeg, .jpg, .bmp and .png",
@@ -102,7 +109,6 @@ export default function AddHotel() {
     resolver: yupResolver(schema),
   });
 
-
   const [heroFile, setHero] = useState(null);
   const [imageFile, setImage] = useState(null);
 
@@ -115,33 +121,31 @@ export default function AddHotel() {
     setImage(e.target.files.length);
   };
 
-
-  const [allFacilities, setFacilities]  = useState(null)
+  const [allFacilities, setFacilities] = useState(null);
 
   useEffect(() => {
     const hotelFacilities = async () => {
-      const response = await axios.get(APIURL + `api/facilities?populate=*`)
-      const theFacilities = response.data.data
-      setFacilities(theFacilities)
-     }
-     hotelFacilities();
-  }, [])
-
+      const response = await axios.get(APIURL + `api/facilities?populate=*`);
+      const theFacilities = response.data.data;
+      setFacilities(theFacilities);
+    };
+    hotelFacilities();
+  }, []);
 
   const postHotel = async (data) => {
-    setSuccess(false)
+    setSuccess(false);
     setDataTransit(true);
     setError(null);
     const formData = new FormData();
 
-    for(let i = 0; i < data.images.length; i++) {
-      formData.append("files.images", data.images[i], data.images[i].name)
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append("files.images", data.images[i], data.images[i].name);
     }
     formData.append("files.hero", data.hero[0], data.hero[0].name);
-    let facilitiesId = []
-    allFacilities.forEach(item => {
-      data[item.attributes.facility] && facilitiesId.push(parseInt(item.id))
-    })
+    let facilitiesId = [];
+    allFacilities.forEach((item) => {
+      data[item.attributes.facility] && facilitiesId.push(parseInt(item.id));
+    });
 
     formData.append(
       "data",
@@ -160,7 +164,7 @@ export default function AddHotel() {
           Authorization: `Bearer ${auth}`,
         },
       });
-      setSuccess(true)
+      setSuccess(true);
     } catch (e) {
       console.log(e);
       setError(e.response.data.error.message);
@@ -188,7 +192,12 @@ export default function AddHotel() {
           {errors.description && (
             <DisplayMessage>{errors.description.message}</DisplayMessage>
           )}
-          <StyledInput step="0.5" type="number" {...register("rating")} placeholder="Hotel rating 1-5" />
+          <StyledInput
+            step="0.5"
+            type="number"
+            {...register("rating")}
+            placeholder="Hotel rating 1-5"
+          />
           {errors.rating && (
             <DisplayMessage>{errors.rating.message}</DisplayMessage>
           )}
@@ -225,21 +234,36 @@ export default function AddHotel() {
           {errors.images && (
             <DisplayMessage>{errors.images.message}</DisplayMessage>
           )}
-          <StyledInput type="number" {...register("price")} placeholder="Price" />
+          <StyledInput
+            type="number"
+            {...register("price")}
+            placeholder="Price"
+          />
           {errors.price && (
             <DisplayMessage>{errors.price.message}</DisplayMessage>
           )}
-          <SubheadingStyle>Facilities</SubheadingStyle>
+          <Subheading>Facilities</Subheading>
           <StyledFacilitiesContainer>
-            {allFacilities && allFacilities.map((facility,key) => {
-              return <StyledFacilityContainer key={key}>
-                        <StyledFieldLabel>{facility.attributes.facility}
-                        <input type="checkbox" {...register(`${facility.attributes.facility}`) } />
-                        </StyledFieldLabel>
-                      </StyledFacilityContainer>
-            })}
+            {allFacilities &&
+              allFacilities.map((facility, key) => {
+                return (
+                  <StyledFacilityContainer key={key}>
+                    <StyledFieldLabel>
+                      {facility.attributes.facility}
+                      <input
+                        type="checkbox"
+                        {...register(`${facility.attributes.facility}`)}
+                      />
+                    </StyledFieldLabel>
+                  </StyledFacilityContainer>
+                );
+              })}
           </StyledFacilitiesContainer>
-          {dataTransit ? <LoadingWheel/> : <StyledButton>CREATE HOTEL</StyledButton> }
+          {dataTransit ? (
+            <LoadingWheel />
+          ) : (
+            <StyledButton>CREATE HOTEL</StyledButton>
+          )}
         </StyledFieldSet>
       </StyledForm>
     </>

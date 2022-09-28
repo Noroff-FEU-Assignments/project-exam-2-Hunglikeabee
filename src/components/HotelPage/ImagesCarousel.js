@@ -1,29 +1,26 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import "react-image-gallery/styles/css/image-gallery.css";
-import ReactImageGallery from "react-image-gallery"
-
+import ReactImageGallery from "react-image-gallery";
 
 const StyledGallery = styled(ReactImageGallery)`
-& * {
-  height: 250px !important;
-}
-  `
+  & * {
+    height: 250px !important;
+  }
+`;
 
-export default function ImagesCarousel({images}) {
+export default function ImagesCarousel({ images }) {
+  console.log(images);
 
-  console.log(images)
+  const imageTest = images.map((image) => {
+    return {
+      original: image.attributes.formats.medium.url
+        ? image.attributes.formats.medium.url
+        : image.attributes.formats.small.url,
+      thumbnail: image.attributes.formats.small.url,
+    };
+  });
 
-  const imageTest = images.map(image => {
-       return ({
-        original: image.attributes.formats.medium.url ? image.attributes.formats.medium.url : image.attributes.formats.small.url,
-        thumbnail: image.attributes.formats.small.url,
-      })
-    })
+  console.log(imageTest);
 
-
-  console.log(imageTest)
-
-  return(
-    <StyledGallery items={imageTest}></StyledGallery>
-  )
+  return <StyledGallery items={imageTest}></StyledGallery>;
 }

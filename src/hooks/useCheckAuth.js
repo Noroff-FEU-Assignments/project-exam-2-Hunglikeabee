@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function useCheckAuth() {
-  const [auth, setAuth] = useContext(AuthContext)
+  const [auth, setAuth] = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     checkToken();
@@ -15,15 +15,16 @@ export default function useCheckAuth() {
   }, []);
   async function checkToken() {
     try {
-      const response = await axios.get(APIURL + "api/contactforms/", {headers: {
-        Authorization: `Bearer ${auth}`
-      }})
-      if(response.stats === 401 || response.status === 403) {
-        setAuth(null)
+      const response = await axios.get(APIURL + "api/contactforms/", {
+        headers: {
+          Authorization: `Bearer ${auth}`,
+        },
+      });
+      if (response.status === 401 || response.status === 403) {
+        setAuth(null);
       }
-    }
-    catch(e) {
-      setAuth(null)
+    } catch (e) {
+      setAuth(null);
     }
   }
 }

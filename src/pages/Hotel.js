@@ -8,13 +8,13 @@ import {
   StyledTextContainer,
   StyledPrice,
   StyledDescriptionText,
-} from "../components/hotelpage/StyledHotel";
+} from "../components/HotelPage/StyledHotel";
 import DefaultButton from "../components/general/DefaultButton";
-import Hero from "../components/homepage/HeroImage";
-import Facilities from "../components/hotelpage/Facilities";
+import Hero from "../components/HomePage/HeroImage";
+import Facilities from "../components/HotelPage/Facilities";
 import Subheading from "../components/general/Subheading";
-import ImagesCarousel from "../components/hotelpage/ImagesCarousel";
-import OrderHotel from "../components/hotelpage/OrderHotel";
+import ImagesCarousel from "../components/HotelPage/ImagesCarousel";
+import OrderHotel from "../components/HotelPage/OrderHotel";
 
 export default function Hotel() {
   const [apiData] = useContext(ApiContext);
@@ -32,7 +32,7 @@ export default function Hotel() {
   useEffect(() => {
     document.title = thisHotel[0].attributes.name;
     document.addEventListener("keydown", hideModalOnEscape, true);
-  }, []);
+  });
 
   const hideModalOnEscape = (e) => {
     if (e.key === "Escape") {

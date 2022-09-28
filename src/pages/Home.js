@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import SearchBar from "../components/general/SearchBar";
-import Activities from "../components/homepage/Activities";
-import Hero from "../components/homepage/HeroImage";
+import Activities from "../components/HomePage/Activities";
+import Hero from "../components/HomePage/HeroImage";
 import HeroImage from "../images/herofixed.jpg";
 import FancyText from "../components/general/FancyText";
 

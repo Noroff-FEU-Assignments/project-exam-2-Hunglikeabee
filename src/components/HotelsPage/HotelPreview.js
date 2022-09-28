@@ -14,7 +14,7 @@ import AuthContext from "../../context/AuthContext";
 import DeleteButton from "../general/DeleteButton";
 
 export default function HotelPreview({ data }) {
-  const [auth, setAuth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
 
   return data.length > 0 ? (
     data.map((hotel, key) => {

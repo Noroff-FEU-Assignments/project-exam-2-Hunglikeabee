@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import ApiContext from "../context/ApiContext";
-import HotelPreview from "../components/hotelspage/HotelPreview";
+import HotelPreview from "../components/HotelsPage/HotelPreview";
 import HeadingH1Style from "../components/general/HeadingH1Style";
 import GetHotelApi from "../hooks/useApiCall";
 

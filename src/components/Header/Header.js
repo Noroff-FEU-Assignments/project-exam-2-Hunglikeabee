@@ -11,7 +11,6 @@ export default function Header() {
         <Menu />
         <Hamburger />
       </StyledMenu>
-      
     </StyledMenuContainer>
   );
 }

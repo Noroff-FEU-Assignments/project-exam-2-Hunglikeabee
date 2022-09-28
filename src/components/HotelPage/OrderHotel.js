@@ -31,7 +31,6 @@ export default function OrderHotel(props) {
   ]);
 
   const { id } = useParams();
-  const emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const hotelEnquiry = APIURL + `api/enquiries/`;
   const [orderSend, setOrderSend] = useState(false);
   const [error, setError] = useState(null);

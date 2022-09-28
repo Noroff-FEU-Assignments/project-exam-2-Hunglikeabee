@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -25,80 +24,79 @@ import HeadingH1Style from "../general/HeadingH1Style";
 import LoadingWheel from "../general/LoadingWheel";
 import useCheckAuth from "../../hooks/useCheckAuth";
 import Subheading from "../general/Subheading";
-import GetHotelApi from "../../hooks/useApiCall";
+
+const schema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Enter a title")
+    .min(3, "Needs to be atleast 3 characters")
+    .max(20, "Max lenght 20 characters"),
+  description: yup
+    .string()
+    .required("Enter a description")
+    .min(20, "Needs to be atleast 20 characters"),
+  rating: yup
+    .number()
+    .required("Enter a rating between 1-5")
+    .typeError("Must be a valid number")
+    .oneOf(
+      [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+      "Must be one of: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 "
+    ),
+  hero: yup
+    .mixed()
+    .required("You need to add a image")
+    .test("fileSize", "The file is too large, max 10MB", (value) => {
+      return value[0].size ? value[0].size < 10000000 : "";
+    })
+    .test(
+      "type",
+      "Only the following formats are accepted: .jpeg, .jpg, .bmp and .png",
+      (value) => {
+        return (
+          value &&
+          (value[0].type === "image/jpeg" ||
+            value[0].type === "image/bmp" ||
+            value[0].type === "image/png")
+        );
+      }
+    ),
+  images: yup
+    .mixed()
+    .required("You need to add a image")
+    .test(
+      "fileSize",
+      "The files are too large, max 10MB each file",
+      (value) => {
+        return value[0].size ? value[0].size < 10000000 : "";
+      }
+    )
+    .test(
+      "type",
+      "Only the following formats are accepted: .jpeg, .jpg, .bmp and .png",
+      (value) => {
+        return (
+          value &&
+          (value[0].type === "image/jpeg" ||
+            value[0].type === "image/bmp" ||
+            value[0].type === "image/png")
+        );
+      }
+    ),
+  price: yup
+    .number()
+    .typeError("Specify a number")
+    .required("Enter a price")
+    .min(1, "Needs atleast 1 number"),
+});
 
 export default function AddHotel() {
-  const [auth, setAuth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
   const [dataTransit, setDataTransit] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
   useCheckAuth();
-
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .required("Enter a title")
-      .min(3, "Needs to be atleast 3 characters")
-      .max(20, "Max lenght 20 characters"),
-    description: yup
-      .string()
-      .required("Enter a description")
-      .min(20, "Needs to be atleast 20 characters"),
-    rating: yup
-      .number()
-      .required("Enter a rating between 1-5")
-      .typeError("Must be a valid number")
-      .oneOf(
-        [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
-        "Must be one of: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 "
-      ),
-    hero: yup
-      .mixed()
-      .required("You need to add a image")
-      .test("fileSize", "The file is too large, max 10MB", (value) => {
-        return value[0].size ? value[0].size < 10000000 : "";
-      })
-      .test(
-        "type",
-        "Only the following formats are accepted: .jpeg, .jpg, .bmp and .png",
-        (value) => {
-          return (
-            value &&
-            (value[0].type === "image/jpeg" ||
-              value[0].type === "image/bmp" ||
-              value[0].type === "image/png")
-          );
-        }
-      ),
-    images: yup
-      .mixed()
-      .required("You need to add a image")
-      .test(
-        "fileSize",
-        "The files are too large, max 10MB each file",
-        (value) => {
-          return value[0].size ? value[0].size < 10000000 : "";
-        }
-      )
-      .test(
-        "type",
-        "Only the following formats are accepted: .jpeg, .jpg, .bmp and .png",
-        (value) => {
-          return (
-            value &&
-            (value[0].type === "image/jpeg" ||
-              value[0].type === "image/bmp" ||
-              value[0].type === "image/png")
-          );
-        }
-      ),
-    price: yup
-      .number()
-      .typeError("Specify a number")
-      .required("Enter a price")
-      .min(1, "Needs atleast 1 number"),
-  });
 
   const {
     register,

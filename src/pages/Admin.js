@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import HeadingH1Style from "../components/general/HeadingH1Style";
 import { useEffect } from "react";
 import useCheckAuth from "../hooks/useCheckAuth";
-import { StyledAdminPanel } from "../components/adminPage/StyledAdmin";
+import { StyledAdminPanel } from "../components/adminpage/StyledAdmin";
 
 export default function Admin() {
   useCheckAuth();

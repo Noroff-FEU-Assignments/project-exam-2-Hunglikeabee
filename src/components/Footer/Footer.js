@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { LogoutButton } from "../Header/components/StyledMenu";
+import { LogoutButton } from "../header/components/StyledMenu";
 import Subheading from "../general/Subheading";
 import {
   StyledContainer,

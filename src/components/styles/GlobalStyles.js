@@ -36,6 +36,10 @@ h1, h2, h3, h4, button {
 html, body {
   background-color: ${props => props.theme.colors.DarkGray}
 }
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
 `;
 
 export default GlobalStyle;

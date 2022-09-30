@@ -20,7 +20,6 @@ import DefaultButton from "../general/DefaultButton";
 import { StyledCloseButton, StyledPrice } from "./StyledHotel";
 import Subheading from "../general/Subheading";
 import { StyledBlackOverylay } from "../Header/components/StyledHamburger";
-import { extendMoment } from 'moment-range';
 
 export default function OrderHotel(props) {
 
@@ -33,9 +32,6 @@ export default function OrderHotel(props) {
   ]);
 
   const [daysBetween, setBetween] = useState(null)
-
-  const momentRange = extendMoment(moment);
-
 
   useEffect(() => {
          // One day in milliseconds
@@ -51,7 +47,6 @@ export default function OrderHotel(props) {
     const diffInDays = Math.round(diffInTime / oneDay);
     setBetween(diffInDays)
   }, [currentDate])
-
 
 
   const { id } = useParams();

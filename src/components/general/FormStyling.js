@@ -19,7 +19,7 @@ export const StyledInput = styled.input`
   width: 100%;
   flex: 1;
   max-width: 85%;
-  margin: 10px auto;
+  margin: 10px;
   padding: 10px;
   border-radius: 50px;
   font-size: 20px;
@@ -70,6 +70,7 @@ export const StyledFieldLabel = styled.label`
   font-size: 20px;
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
   border-radius: 50px;
+  max-width: 85%;
 
   & * {
     margin-right: 20px;

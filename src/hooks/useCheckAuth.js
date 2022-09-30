@@ -22,6 +22,7 @@ export default function useCheckAuth() {
       });
       if (response.status === 401 || response.status === 403) {
         setAuth(null);
+        navigate("/");
       }
     } catch (e) {
       setAuth(null);

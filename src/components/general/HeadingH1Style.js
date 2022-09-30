@@ -17,7 +17,7 @@ const StyledHeading = styled.div`
   position: ${(props) => (props.position ? props.position : "relative")};
   right: ${(props) => (props.offsetRight ? props.offsetRight : "")};
 
-  @media (max-width: 700px) {
+  @media (max-width: 750px) {
     border-radius: 0 50px 50px 0;
     font-size: 18px;
     margin-left: 0px;

@@ -29,15 +29,15 @@ export const StyledTop = styled.div`
   background-color: ${(props) => props.theme.colors.DarkGray};
 `;
 
-export const StyledImage = styled.div`
+export const StyledImage = styled.img`
   flex: 1;
   display: flex;
-  background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
-  background-size: cover;
-  background-position: center;
   transition: 0.5s;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
 
   &:hover {
     transform: scale(1.6);

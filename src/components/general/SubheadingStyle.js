@@ -25,5 +25,5 @@ export const StyledFirstLetter = styled.h2`
 `;
 
 export const StyledRestLetter = styled.h2`
-  color: ${(props) => props.theme.colors.White};
+  color: ${(props) => props.color ? props.color : props.theme.colors.White};
 `;

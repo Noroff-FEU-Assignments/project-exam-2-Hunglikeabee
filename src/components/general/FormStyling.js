@@ -18,8 +18,8 @@ export const StyledFieldSet = styled.fieldset`
 export const StyledInput = styled.input`
   width: 100%;
   flex: 1;
-  max-width: 85vw;
-  margin: 10px;
+  max-width: 85%;
+  margin: 10px auto;
   padding: 10px;
   border-radius: 50px;
   font-size: 20px;

@@ -57,7 +57,6 @@ export default function Login() {
         identifier: data.username,
         password: data.password,
       });
-      console.log(response);
       if (response.statusText === "OK") {
         setAuth(response.data.jwt);
         navigate("/admin");

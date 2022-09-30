@@ -26,31 +26,42 @@ export const StyledHotelInfoContainer = styled.div`
 
 export const StyledContainer = styled.div`
 margin-bottom: 40px;
+display: flex;
+flex-wrap: wrap;
+width: 95%;
+justify-content: space-evenly;
+align-items: flex-start;
 `
 
 export const StyledTextContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   flex: 1;
-  max-width: 600px;
+  margin: 10px;
+  min-width: 50vw;
+  @media (min-width: 800px) {
+    min-width: 0;
+    width: 500px;
+  }
 `;
 
 export const StyledDescriptionText = styled.p`
   padding: 40px 20px;
   background-color: white;
   color: black;
+  min-height: 300px;
+  width: 100%;
   border-radius: 50px;
+  max-width: 95vw;
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
 `;
 
 export const StyledPrice = styled.div`
-  position: absolute;
-  bottom: -40px;
   background-color: ${(props) => props.theme.colors.LightYellow};
   padding: 15px;
   border-radius: 50px;
-  font-size: 24px;
-  align-self: end;
+  font-size: 18px;
+  align-self: center;
 `;
 
 export const StyledCloseButton = styled.div`

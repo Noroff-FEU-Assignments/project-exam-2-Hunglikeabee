@@ -7,7 +7,6 @@ import {
   StyledBars,
 } from "./StyledHamburger";
 import { NavLink } from "react-router-dom";
-
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
 import { LogoutButton } from "./StyledMenu";
@@ -19,6 +18,12 @@ export default function Hamburger() {
     scrollToTop();
     setHamburger((prev) => !prev);
   };
+
+  const handleKeyDown = (e) => {
+    if(e.key === "Enter") {
+      setHamburger((prev) => !prev);
+    }
+  }
 
   const navigate = useNavigate();
 
@@ -89,7 +94,7 @@ export default function Hamburger() {
 
   return (
     <StyledMenu>
-      <StyledHamburger onClick={() => setHamburger((prev) => !prev)}>
+      <StyledHamburger aria-label="Hamburger menu" tabIndex={0} onKeyDown={(e) => handleKeyDown(e)} onClick={() => setHamburger((prev) => !prev)}>
         <StyledBars className={hamburgerState ? "openMenu" : ""} />
       </StyledHamburger>
       {hamburgerState ? showMenu : ""}

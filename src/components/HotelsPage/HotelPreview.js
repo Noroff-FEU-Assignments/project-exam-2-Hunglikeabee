@@ -28,14 +28,9 @@ export default function HotelPreview({ data }) {
               <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
               <StyledRestLetter>{PropsText}</StyledRestLetter>
             </StyledTop>
-            <StyledImage
-              style={{
-                backgroundImage: `url(${
-                  hotel.attributes.hero.data
+            <StyledImage alt={hotel.attributes.altText} src={hotel.attributes.hero.data
                     ? hotel.attributes.hero.data.attributes.formats.small.url
-                    : ""
-                })`,
-              }}
+                    : ""}
             ></StyledImage>
             <StyledBottom>
               <div>{ShowStarsRating(hotel.attributes.rating)}</div>

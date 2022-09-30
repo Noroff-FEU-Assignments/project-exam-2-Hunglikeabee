@@ -38,7 +38,6 @@ export default function Activities() {
         });
         setActivities(activities);
       } catch (e) {
-        console.log(e);
         setError(e.response.data);
       }
     };

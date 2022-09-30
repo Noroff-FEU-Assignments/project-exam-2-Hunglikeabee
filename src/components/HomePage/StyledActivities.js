@@ -17,16 +17,17 @@ export const StyledActivitiesContainer = styled.div`
 export const StyledActivityContainer = styled.a`
   width: 250px;
   max-width: 95vw;
-  background-color: ${(props) => props.theme.colors.White};
+  background-color: white;
   text-decoration: none;
-  color: ${(props) => props.theme.colors.Black};
+  color: black;
   display: flex;
   flex-direction: column;
   margin: 20px;
-  border-radius: 50px;
+  border-radius: 50px 0px;
+  box-shadow: ${(props) => props.theme.shading.BoxShadow};
   &:hover button {
     color: ${(props) => props.theme.colors.LightPink};
-    background-color: ${(props) => props.theme.colors.Black};
+    background-color: black;
   }
 `;
 
@@ -54,7 +55,7 @@ export const StyledDescription = styled.p`
 export const StyledButton = styled.button`
   padding: 10px;
   border: none;
-  color: ${(props) => props.theme.colors.Black};
+  color: black;
   background-color: ${(props) => props.theme.colors.LightYellow};
   font-size: 22px;
   cursor: pointer;

@@ -17,6 +17,7 @@
     "cheerio": "^1.0.0-rc.12",
     "date-fns": "^2.29.3",
     "moment": "^2.29.4",
+    "moment-range": "^4.0.2",
     "nth-check": "^2.1.1",
     "react": "^18.2.0",
     "react-calendar": "^3.7.0",

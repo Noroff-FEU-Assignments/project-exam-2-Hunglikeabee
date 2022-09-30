@@ -48,11 +48,15 @@ export const StyledShowMenu = styled.div`
 export const StyledBlackOverylay = styled.div`
   z-index: 8998;
   position: fixed;
+  overflow-y: scroll;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledHamburger = styled.div`

@@ -22,8 +22,9 @@ export default function Home() {
       <SearchBar placeholder="Find accommodation..." />
       <FancyText align="left">"Where your</FancyText>
       <FancyText fontSize="50">DREAMS</FancyText>
-      <FancyText align="right">and our vision meet!"</FancyText>
+      <FancyText align="right">and Bergen meet!"</FancyText>
       <Activities />
     </>
   );
 }
+  

@@ -10,18 +10,6 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
-* {
-  font-family: "OpenSans", Arial, Helvetica, sans-serif;
-}
-
-h1, h2, h3, h4, button {
-  font-family: "BebasNeue";
-}
-
-html, body {
-  background-color: ${props => props.theme.colors.DarkGray}
-}
-
 @font-face {
   font-family: "BebasNeue";
   src: url(${BebasNeue}) format("truetype");
@@ -37,8 +25,16 @@ html, body {
   src: url(${Cormorant}) format("truetype");
 }
 
-.rdrDefinedRangesWrapper{
-  display: none !important;
+* {
+  font-family: "OpenSans", Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, button {
+  font-family: "BebasNeue";
+}
+
+html, body {
+  background-color: ${props => props.theme.colors.DarkGray}
 }
 `;
 

@@ -8,7 +8,6 @@ import { APIURL } from "../../constants/APIURL";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
-
 import {
   StyledForm,
   StyledFieldSet,
@@ -24,6 +23,7 @@ import HeadingH1Style from "../general/HeadingH1Style";
 import LoadingWheel from "../general/LoadingWheel";
 import useCheckAuth from "../../hooks/useCheckAuth";
 import Subheading from "../general/Subheading";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   name: yup
@@ -61,6 +61,11 @@ const schema = yup.object().shape({
         );
       }
     ),
+    alttext: yup
+      .string()
+      .required("Enter alt text")
+      .min(3, "Needs to be atleast 3 characters")
+      .max(100, "Max length 100 characters"),
   images: yup
     .mixed()
     .required("You need to add a image")
@@ -111,7 +116,6 @@ export default function AddHotel() {
   const [imageFile, setImage] = useState(null);
 
   const handleHeroFile = (e) => {
-    console.log(e);
     setHero(e.target.files[0].name);
   };
 
@@ -153,6 +157,7 @@ export default function AddHotel() {
         price: data.price,
         rating: data.rating,
         facilityhotels: facilitiesId,
+        altText: data.alttext,
       })
     );
 
@@ -164,11 +169,12 @@ export default function AddHotel() {
       });
       setSuccess(true);
     } catch (e) {
-      console.log(e);
       setError(e.response.data.error.message);
     } finally {
-      setDataTransit(false);
       reset();
+      setDataTransit(false);
+      setHero(null)
+      setImage(null)
     }
   };
 
@@ -185,7 +191,7 @@ export default function AddHotel() {
           )}
           <StyledTextArea
             {...register("description")}
-            placeholder="Description"
+            placeholder="Description..."
           />
           {errors.description && (
             <DisplayMessage>{errors.description.message}</DisplayMessage>
@@ -203,15 +209,21 @@ export default function AddHotel() {
             <FontAwesomeIcon icon={faFile} />
             {heroFile ? heroFile : "Choose a hero image"}
           </StyledFieldLabel>
+          {errors.hero && (
+            <DisplayMessage>{errors.hero.message}</DisplayMessage>
+          )}
           <StyledFileInput
             onInput={handleHeroFile}
             type="file"
             id="hero"
             {...register("hero")}
-            placeholder="Select hero"
           />
           {errors.hero && (
             <DisplayMessage>{errors.hero.message}</DisplayMessage>
+          )}
+          <StyledInput {...register("alttext")} placeholder="Hero alt text..." />
+          {errors.alttext && (
+            <DisplayMessage>{errors.alttext.message}</DisplayMessage>
           )}
           <StyledFieldLabel htmlFor="images">
             <FontAwesomeIcon icon={faFile} />
@@ -221,13 +233,15 @@ export default function AddHotel() {
               ? `${imageFile} files selected`
               : "Choose Images"}
           </StyledFieldLabel>
+          {errors.images && (
+            <DisplayMessage>{errors.images.message}</DisplayMessage>
+          )}
           <StyledFileInput
             onInput={handleImageFile}
             type="file"
             multiple
             id="images"
             {...register("images")}
-            placeholder="Select image"
           />
           {errors.images && (
             <DisplayMessage>{errors.images.message}</DisplayMessage>

@@ -7,7 +7,7 @@ export default function Subheading(props) {
   return (
     <StyledHeading {...props}>
       <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
-      <StyledRestLetter>{PropsText}</StyledRestLetter>
+      <StyledRestLetter {...props}>{PropsText}</StyledRestLetter>
     </StyledHeading>
   );
 }

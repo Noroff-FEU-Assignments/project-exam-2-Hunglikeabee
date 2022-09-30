@@ -52,21 +52,22 @@ export default function Hotel() {
         </Hero>
         <ImagesCarousel images={hotelImages} />
         <StyledHotelInfoContainer>
+
           <StyledContainer>
-            <Subheading>Information</Subheading>
             <StyledTextContainer>
+            <Subheading>Information</Subheading>
               <StyledDescriptionText>
                 {thisHotel[0].attributes.description}
               </StyledDescriptionText>
             </StyledTextContainer>
             <Facilities hotelId={id} />
           </StyledContainer>
-          <StyledPrice>Price: {thisHotel[0].attributes.price}NOK</StyledPrice>
+          <StyledPrice>Price per night: {thisHotel[0].attributes.price},-NOK</StyledPrice>
         </StyledHotelInfoContainer>
         <DefaultButton href="#bookHotel" onClick={handleOrderModal}>
           ORDER THIS HOTEL
         </DefaultButton>
-        {orderModal && <OrderHotel handleClick={handleOrderModal} />}
+        {orderModal && <OrderHotel hotelPrice={thisHotel[0].attributes.price} handleClick={handleOrderModal} />}
       </StyledHotelContainer>
     )
   );

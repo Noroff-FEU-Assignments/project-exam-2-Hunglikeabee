@@ -37,7 +37,6 @@ export default function Facilities({ hotelId }) {
           const oneFacility = allFacilities.filter(
             (facility) => facility.id === item
           );
-          console.log(oneFacility);
           return (
             <StyledFacility key={key}>
               <StyledIcon

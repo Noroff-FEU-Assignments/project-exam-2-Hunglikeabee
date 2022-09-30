@@ -11,6 +11,7 @@ export const StyledFacilities = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 250px;
+  margin: 10px;
 `;
 
 export const StyledFacility = styled.div`

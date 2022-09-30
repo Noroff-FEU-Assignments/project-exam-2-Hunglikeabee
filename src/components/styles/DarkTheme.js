@@ -10,6 +10,6 @@ export const DarkTheme = {
     White: "#000000",
   },
   shading: {
-    BoxShadow: "0px 0px 10px 5px rgba(0,0,0, 0.5)",
+    BoxShadow: "0px 0px 5px 2px rgba(0,0,0, 0.3)",
   },
 };

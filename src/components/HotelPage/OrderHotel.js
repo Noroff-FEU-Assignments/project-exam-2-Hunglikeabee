@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
@@ -6,7 +6,6 @@ import "react-date-range/dist/theme/default.css";
 import { addDays } from "date-fns";
 import { StyledOrderContainer } from "./StyledOrderHotel";
 import { StyledInput } from "../general/FormStyling";
-import HeadingH1Style from "../general/HeadingH1Style";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -18,7 +17,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import LoadingWheel from "../general/LoadingWheel";
 import DefaultButton from "../general/DefaultButton";
-import { StyledCloseButton } from "./StyledHotel";
+import { StyledCloseButton, StyledPrice } from "./StyledHotel";
+import Subheading from "../general/Subheading";
+import { StyledBlackOverylay } from "../Header/components/StyledHamburger";
+import { extendMoment } from 'moment-range';
 
 export default function OrderHotel(props) {
 
@@ -29,6 +31,28 @@ export default function OrderHotel(props) {
       key: "selection",
     },
   ]);
+
+  const [daysBetween, setBetween] = useState(null)
+
+  const momentRange = extendMoment(moment);
+
+
+  useEffect(() => {
+         // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    const start = currentDate[0].startDate
+    const end = currentDate[0].endDate
+
+    // Calculating the time difference between two dates
+    const diffInTime = end.getTime() - start.getTime();
+
+    // Calculating the no. of days between two dates
+    const diffInDays = Math.round(diffInTime / oneDay);
+    setBetween(diffInDays)
+  }, [currentDate])
+
+
 
   const { id } = useParams();
   const hotelEnquiry = APIURL + `api/enquiries/`;
@@ -86,11 +110,12 @@ export default function OrderHotel(props) {
   };
 
   return (
+    <StyledBlackOverylay>
     <StyledOrderContainer
       id="bookHotel"
       onSubmit={handleSubmit(sendOrder)}
     >
-      <HeadingH1Style>Book hotel</HeadingH1Style>
+      <Subheading color="black">Book hotel</Subheading>
       {messageSuccessful ? (
         <DisplayMessage success>Order Placed</DisplayMessage>
       ) : error ? (
@@ -119,6 +144,7 @@ export default function OrderHotel(props) {
         direction="vertical"
         minDate={new Date()}
       />
+      <StyledPrice>Total price: {props.hotelPrice * daysBetween},-NOK</StyledPrice>
       {orderSend ? (
         <LoadingWheel />
       ) : (
@@ -128,5 +154,7 @@ export default function OrderHotel(props) {
         <FontAwesomeIcon icon={faClose} />
       </StyledCloseButton>
     </StyledOrderContainer>
+    </StyledBlackOverylay>
+
   )
 }

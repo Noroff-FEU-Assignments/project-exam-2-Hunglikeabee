@@ -10,7 +10,7 @@ export const StyledOrderContainer = styled.form`
   justify-content: center;
   align-items: center;
   width: 500px;
-  max-width: 95vw;
+  max-width: 99%;
   flex-direction: column;
   padding: 20px 0px;
   border-radius: 50px;

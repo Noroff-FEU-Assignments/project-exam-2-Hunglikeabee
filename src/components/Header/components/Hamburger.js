@@ -20,10 +20,10 @@ export default function Hamburger() {
   };
 
   const handleKeyDown = (e) => {
-    if(e.key === "Enter") {
+    if (e.key === "Enter") {
       setHamburger((prev) => !prev);
     }
-  }
+  };
 
   const navigate = useNavigate();
 
@@ -94,7 +94,12 @@ export default function Hamburger() {
 
   return (
     <StyledMenu>
-      <StyledHamburger aria-label="Hamburger menu" tabIndex={0} onKeyDown={(e) => handleKeyDown(e)} onClick={() => setHamburger((prev) => !prev)}>
+      <StyledHamburger
+        aria-label="Hamburger menu"
+        tabIndex={0}
+        onKeyDown={(e) => handleKeyDown(e)}
+        onClick={() => setHamburger((prev) => !prev)}
+      >
         <StyledBars className={hamburgerState ? "openMenu" : ""} />
       </StyledHamburger>
       {hamburgerState ? showMenu : ""}

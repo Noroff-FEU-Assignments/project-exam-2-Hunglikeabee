@@ -7,15 +7,15 @@ import Subheading from "./Subheading";
 import DefaultButton from "./DefaultButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { DisplayFixedMessage } from "./DisplayMessage";
 import LoadingWheel from "./LoadingWheel";
+import { useNavigate } from "react-router-dom";
 
-// Requires an "enpoint" prop to the "api/endpoint/ and a "itemId" prop for the id of the endpoint
 export default function DeleteButton(props) {
-  const [auth, setAuth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
   const [showPrompt, setPromptShow] = useState(false);
-  const [error, setError] = useState("");
   const [tryDelete, setDelete] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleAccept = () => {
     handleDelete();
@@ -32,10 +32,9 @@ export default function DeleteButton(props) {
             Authorization: `Bearer ${auth}`,
           },
         });
-        window.location.reload();
+          window.location.reload();
       } catch (e) {
-        setError(e.message);
-        setDelete(false);
+        navigate("/login");
       }
     };
     tryDelete();
@@ -43,11 +42,6 @@ export default function DeleteButton(props) {
 
   return (
     <StyledDelete onClick={() => setPromptShow((prev) => !prev)}>
-      {error ? (
-        <DisplayFixedMessage>There was an error: {error}</DisplayFixedMessage>
-      ) : (
-        ""
-      )}
       {tryDelete ? <LoadingWheel /> : <FontAwesomeIcon icon={faTrashCan} />}
       {showPrompt ? (
         <StyledPrompt role="alert">

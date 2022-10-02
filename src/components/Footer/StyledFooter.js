@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-border-top: 3px solid ${(props) => props.theme.colors.White};
-margin-top: 100px;
-`
+  border-top: 3px solid ${(props) => props.theme.colors.White};
+  margin-top: 100px;
+`;
 
 export const StyledFooterContainer = styled.div`
   margin: auto;
@@ -46,7 +46,6 @@ export const StyledMapContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 `;
 
 export const StyledCopyright = styled.div`

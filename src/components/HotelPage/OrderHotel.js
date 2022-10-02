@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
@@ -22,7 +22,6 @@ import Subheading from "../general/Subheading";
 import { StyledBlackOverylay } from "../Header/components/StyledHamburger";
 
 export default function OrderHotel(props) {
-
   const [currentDate, setDate] = useState([
     {
       startDate: new Date(),
@@ -31,23 +30,22 @@ export default function OrderHotel(props) {
     },
   ]);
 
-  const [daysBetween, setBetween] = useState(null)
+  const [daysBetween, setBetween] = useState(null);
 
   useEffect(() => {
-         // One day in milliseconds
+    // One day in milliseconds
     const oneDay = 1000 * 60 * 60 * 24;
 
-    const start = currentDate[0].startDate
-    const end = currentDate[0].endDate
+    const start = currentDate[0].startDate;
+    const end = currentDate[0].endDate;
 
     // Calculating the time difference between two dates
     const diffInTime = end.getTime() - start.getTime();
 
     // Calculating the no. of days between two dates
     const diffInDays = Math.round(diffInTime / oneDay);
-    setBetween(diffInDays)
-  }, [currentDate])
-
+    setBetween(diffInDays);
+  }, [currentDate]);
 
   const { id } = useParams();
   const hotelEnquiry = APIURL + `api/enquiries/`;
@@ -106,50 +104,42 @@ export default function OrderHotel(props) {
 
   return (
     <StyledBlackOverylay>
-    <StyledOrderContainer
-      id="bookHotel"
-      onSubmit={handleSubmit(sendOrder)}
-    >
-      <Subheading color="black">Book hotel</Subheading>
-      {messageSuccessful ? (
-        <DisplayMessage success>Order Placed</DisplayMessage>
-      ) : error ? (
-        <DisplayMessage error>{error}</DisplayMessage>
-      ) : (
-        ""
-      )}
-      <StyledInput {...register("name")} type="text" placeholder="Name" />
-      {errors.name && (
-        <DisplayMessage>{errors.name.message}</DisplayMessage>
-      )}
-      <StyledInput
-        {...register("email")}
-        type="email"
-        placeholder="E-mail"
-      />
-      {errors.email && (
-        <DisplayMessage>{errors.email.message}</DisplayMessage>
-      )}
-      <DateRangePicker
-        onChange={(item) => setDate([item.selection])}
-        showSelectionPreview={true}
-        moveRangeOnFirstSelection={false}
-        months={1}
-        ranges={currentDate}
-        direction="vertical"
-        minDate={new Date()}
-      />
-      <StyledPrice>Total price: {props.hotelPrice * daysBetween},-NOK</StyledPrice>
-      {orderSend ? (
-        <LoadingWheel />
-      ) : (
-        <DefaultButton>Place order</DefaultButton>
-      )}
-      <StyledCloseButton onClick={props.handleClick}>
-        <FontAwesomeIcon icon={faClose} />
-      </StyledCloseButton>
-    </StyledOrderContainer>
+      <StyledOrderContainer id="bookHotel" onSubmit={handleSubmit(sendOrder)}>
+        <Subheading color="black">Book hotel</Subheading>
+        {messageSuccessful ? (
+          <DisplayMessage success>Order Placed</DisplayMessage>
+        ) : error ? (
+          <DisplayMessage error>{error}</DisplayMessage>
+        ) : (
+          ""
+        )}
+        <StyledInput {...register("name")} type="text" placeholder="Name" />
+        {errors.name && <DisplayMessage>{errors.name.message}</DisplayMessage>}
+        <StyledInput {...register("email")} type="email" placeholder="E-mail" />
+        {errors.email && (
+          <DisplayMessage>{errors.email.message}</DisplayMessage>
+        )}
+        <DateRangePicker
+          onChange={(item) => setDate([item.selection])}
+          showSelectionPreview={true}
+          moveRangeOnFirstSelection={false}
+          months={1}
+          ranges={currentDate}
+          direction="vertical"
+          minDate={new Date()}
+        />
+        <StyledPrice>
+          Total price: {props.hotelPrice * daysBetween},-NOK
+        </StyledPrice>
+        {orderSend ? (
+          <LoadingWheel />
+        ) : (
+          <DefaultButton>Place order</DefaultButton>
+        )}
+        <StyledCloseButton onClick={props.handleClick}>
+          <FontAwesomeIcon icon={faClose} />
+        </StyledCloseButton>
+      </StyledOrderContainer>
     </StyledBlackOverylay>
-
-  )
+  );
 }

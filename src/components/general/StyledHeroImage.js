@@ -13,15 +13,14 @@ export const StyledHeroContainer = styled.div`
   }
 `;
 
-export const StyledHero = styled.div`
-  background-size: cover;
-  background-position: center;
+export const StyledHero = styled.img`
   height: 400px;
   width: 600px;
   border-radius: 50px;
   margin-right: 10px;
   margin-left: 10px;
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
+  object-fit: cover;
 
   @media (max-width: 600px) {
     border-radius: 0px;

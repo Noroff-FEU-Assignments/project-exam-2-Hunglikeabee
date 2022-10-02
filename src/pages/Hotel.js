@@ -10,14 +10,37 @@ import {
   StyledDescriptionText,
 } from "../components/HotelPage/StyledHotel";
 import DefaultButton from "../components/general/DefaultButton";
-import Hero from "../components/HomePage/HeroImage";
+import Hero from "../components/general/HeroImage";
 import Facilities from "../components/HotelPage/Facilities";
 import Subheading from "../components/general/Subheading";
 import ImagesCarousel from "../components/HotelPage/ImagesCarousel";
 import OrderHotel from "../components/HotelPage/OrderHotel";
+import axios from "axios";
 
 export default function Hotel() {
-  const [apiData] = useContext(ApiContext);
+
+  useEffect(() => {
+    const getApi = async () => {
+      try {
+        const fetchApi = await axios.get(
+          `https://exam-year2-api.herokuapp.com/api/hotels?populate=*`
+        );
+        setApi(fetchApi.data.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getApi();
+  }, []);
+
+
+  useEffect(() => {
+    document.title = "Holidaze | " + thisHotel[0].attributes.name;
+    document.addEventListener("keydown", hideModalOnEscape, true);
+  });
+
+
+  const [apiData, setApi] = useContext(ApiContext);
   const { id } = useParams();
   const thisHotel = apiData.filter((item) => item.id === parseInt(id));
   const hotelImages = thisHotel[0].attributes.images.data.map((item) => {
@@ -29,10 +52,7 @@ export default function Hotel() {
     setOrderModal((prev) => !prev);
   };
 
-  useEffect(() => {
-    document.title = thisHotel[0].attributes.name;
-    document.addEventListener("keydown", hideModalOnEscape, true);
-  });
+
 
   const hideModalOnEscape = (e) => {
     if (e.key === "Escape") {
@@ -43,31 +63,32 @@ export default function Hotel() {
   return (
     thisHotel.length > 0 && (
       <StyledHotelContainer>
-        <Hero
-          style={{
-            backgroundImage: `url(${thisHotel[0].attributes.hero.data.attributes.formats.medium.url})`,
-          }}
-        >
-          {thisHotel[0].attributes.name}
-        </Hero>
+        <Hero alt={thisHotel[0].attributes.altText} hotelName={thisHotel[0].attributes.name} src={thisHotel[0].attributes.hero.data.attributes.formats.medium.url} />
+        <Subheading stylish>Images</Subheading>
         <ImagesCarousel images={hotelImages} />
         <StyledHotelInfoContainer>
-
           <StyledContainer>
             <StyledTextContainer>
-            <Subheading>Information</Subheading>
+              <Subheading>Information</Subheading>
               <StyledDescriptionText>
                 {thisHotel[0].attributes.description}
               </StyledDescriptionText>
             </StyledTextContainer>
             <Facilities hotelId={id} />
           </StyledContainer>
-          <StyledPrice>Price per night: {thisHotel[0].attributes.price},-NOK</StyledPrice>
+          <StyledPrice>
+            Price per night: {thisHotel[0].attributes.price},-NOK
+          </StyledPrice>
         </StyledHotelInfoContainer>
         <DefaultButton href="#bookHotel" onClick={handleOrderModal}>
           ORDER THIS HOTEL
         </DefaultButton>
-        {orderModal && <OrderHotel hotelPrice={thisHotel[0].attributes.price} handleClick={handleOrderModal} />}
+        {orderModal && (
+          <OrderHotel
+            hotelPrice={thisHotel[0].attributes.price}
+            handleClick={handleOrderModal}
+          />
+        )}
       </StyledHotelContainer>
     )
   );

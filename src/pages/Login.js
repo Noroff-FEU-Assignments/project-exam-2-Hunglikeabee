@@ -20,8 +20,10 @@ import {
   StyledButton,
 } from "../components/general/FormStyling";
 import LoadingWheel from "../components/general/LoadingWheel";
+import useCheckAuth from "../hooks/useCheckAuth";
 
 export default function Login() {
+  useCheckAuth();
   useEffect(() => {
     document.title = "Holidaze | Login";
   }, []);

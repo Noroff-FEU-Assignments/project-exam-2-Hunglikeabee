@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const StyledMessage = styled.div`
-  width: 500px;
-  max-width: 90%;
+  width: 90%;
+  max-width: 90vw;
   border-radius: 50px;
   background-color: ${(props) =>
     props.error

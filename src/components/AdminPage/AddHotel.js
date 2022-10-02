@@ -46,46 +46,43 @@ const schema = yup.object().shape({
   hero: yup
     .mixed()
     .required("You need to add a image")
-    .test("fileSize", "The file is too large, max 10MB", (value) => {
-      return value[0].size ? value[0].size < 10000000 : "";
-    })
     .test(
       "type",
-      "Only the following formats are accepted: .jpeg, .jpg, .bmp and .png",
+      "Only the following formats are accepted: .jpeg, .jpg, .bmp, .webp and .png",
       (value) => {
         return (
           value &&
           (value[0].type === "image/jpeg" ||
             value[0].type === "image/bmp" ||
+            value[0].type === "image/jpg" ||
+            value[0].type === "image/webp" ||
             value[0].type === "image/png")
         );
       }
     ),
-    alttext: yup
-      .string()
-      .required("Enter alt text")
-      .min(3, "Needs to be atleast 3 characters")
-      .max(100, "Max length 100 characters"),
+  alttext: yup
+    .string()
+    .required("Enter alt text")
+    .min(3, "Needs to be atleast 3 characters")
+    .max(100, "Max length 100 characters"),
   images: yup
     .mixed()
     .required("You need to add a image")
     .test(
-      "fileSize",
-      "The files are too large, max 10MB each file",
-      (value) => {
-        return value[0].size ? value[0].size < 10000000 : "";
-      }
-    )
-    .test(
       "type",
-      "Only the following formats are accepted: .jpeg, .jpg, .bmp and .png",
+      "Only the following formats are accepted: .jpeg, .jpg, .bmp, .webp and .png",
       (value) => {
-        return (
-          value &&
-          (value[0].type === "image/jpeg" ||
-            value[0].type === "image/bmp" ||
-            value[0].type === "image/png")
-        );
+        for(let i=0; i < value.length; i++) {
+          return (
+            value &&
+            (value[i].type === "image/jpeg" ||
+              value[i].type === "image/bmp" ||
+              value[i].type === "image/jpg" ||
+              value[i].type === "image/webp" ||
+              value[i].type === "image/png")
+          );
+        }
+
       }
     ),
   price: yup
@@ -101,12 +98,12 @@ export default function AddHotel() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
+  const navigate = useNavigate();
   useCheckAuth();
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -116,7 +113,7 @@ export default function AddHotel() {
   const [imageFile, setImage] = useState(null);
 
   const handleHeroFile = (e) => {
-    setHero(e.target.files[0].name);
+    setHero(e.target.files.length > 0 ? e.target.files[0].name : "");
   };
 
   const handleImageFile = (e) => {
@@ -135,6 +132,7 @@ export default function AddHotel() {
   }, []);
 
   const postHotel = async (data) => {
+    console.log(data);
     setSuccess(false);
     setDataTransit(true);
     setError(null);
@@ -169,12 +167,11 @@ export default function AddHotel() {
       });
       setSuccess(true);
     } catch (e) {
-      setError(e.response.data.error.message);
+      setError(e.response);
     } finally {
-      reset();
+      setHero(null);
+      setImage(null);
       setDataTransit(false);
-      setHero(null)
-      setImage(null)
     }
   };
 
@@ -221,7 +218,10 @@ export default function AddHotel() {
           {errors.hero && (
             <DisplayMessage>{errors.hero.message}</DisplayMessage>
           )}
-          <StyledInput {...register("alttext")} placeholder="Hero alt text..." />
+          <StyledInput
+            {...register("alttext")}
+            placeholder="Hero alt text..."
+          />
           {errors.alttext && (
             <DisplayMessage>{errors.alttext.message}</DisplayMessage>
           )}
@@ -239,8 +239,8 @@ export default function AddHotel() {
           <StyledFileInput
             onInput={handleImageFile}
             type="file"
-            multiple
             id="images"
+            multiple
             {...register("images")}
           />
           {errors.images && (

@@ -9,8 +9,7 @@ export const StyledHotelContainer = styled.div`
 
 export const StyledHotelInfoContainer = styled.div`
   position: relative;
-  margin: 40px auto;
-  padding: 20px;
+  margin: 60px auto;
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -21,17 +20,17 @@ export const StyledHotelInfoContainer = styled.div`
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
   border-radius: 50px;
   width: 1000px;
-  max-width: 95vw;
+  max-width: 90%;
 `;
 
 export const StyledContainer = styled.div`
-margin-bottom: 40px;
-display: flex;
-flex-wrap: wrap;
-width: 95%;
-justify-content: space-evenly;
-align-items: flex-start;
-`
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  justify-content: space-evenly;
+  align-items: flex-start;
+`;
 
 export const StyledTextContainer = styled.div`
   flex-direction: column;
@@ -62,6 +61,7 @@ export const StyledPrice = styled.div`
   border-radius: 50px;
   font-size: 18px;
   align-self: center;
+  margin-bottom: 50px;
 `;
 
 export const StyledCloseButton = styled.div`

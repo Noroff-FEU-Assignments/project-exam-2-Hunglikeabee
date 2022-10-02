@@ -9,10 +9,7 @@ export default function useCheckAuth() {
   const navigate = useNavigate();
   useEffect(() => {
     checkToken();
-    if (!auth) {
-      navigate("/");
-    }
-  }, []);
+  });
   async function checkToken() {
     try {
       const response = await axios.get(APIURL + "api/contactforms/", {
@@ -20,7 +17,7 @@ export default function useCheckAuth() {
           Authorization: `Bearer ${auth}`,
         },
       });
-      if (response.status === 401 || response.status === 403) {
+      if (response.status !== 200) {
         setAuth(null);
         navigate("/");
       }

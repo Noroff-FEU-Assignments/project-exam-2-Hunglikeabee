@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import LogoLarge from "../../../images/logo/holidazelogo.png";
-import LogoLargeBlack from "../../../images/logo/holidazelogoblack.png"
+import LogoLargeBlack from "../../../images/logo/holidazelogoblack.png";
 const StyledLink = styled(Link)``;
 
 const StyledLogo = styled.div`
   width: 160px;
   height: 80px;
   margin-left: 20px;
-  background-image: url(${props => props.theme.colors.White === "#FFFFFF" ? LogoLarge: LogoLargeBlack});
+  background-image: url(${(props) => props.theme.colors.White === "#FFFFFF" ? LogoLarge : LogoLargeBlack});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

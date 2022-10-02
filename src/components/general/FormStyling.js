@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
+  width: 800px;
+  margin: 0 auto;
   max-width: 100vw;
 `;
 
 export const StyledFieldSet = styled.fieldset`
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: center;
   justify-content: center;
   width: ${(props) => (props.maxWidth ? props.maxWidth : "600px")};
   max-width: 90vw;
@@ -16,10 +18,9 @@ export const StyledFieldSet = styled.fieldset`
 `;
 
 export const StyledInput = styled.input`
-  width: 100%;
+  width: 90%;
   flex: 1;
-  max-width: 85%;
-  margin: 10px;
+  margin: 10px auto;
   padding: 10px;
   border-radius: 50px;
   font-size: 20px;
@@ -43,6 +44,7 @@ export const StyledTextArea = styled.textarea`
 
 export const StyledEye = styled.div`
   color: ${(props) => props.theme.colors.White};
+  margin-left: 10px;
   & svg {
     width: 20px;
     height: 20px;
@@ -50,8 +52,7 @@ export const StyledEye = styled.div`
 `;
 
 export const StyledPasswordLayout = styled.div`
-  width: 100%;
-
+  width: 90%;
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -107,12 +108,12 @@ export const StyledButton = styled.button`
   border: none;
   padding: 10px 20px;
   margin: 10px auto;
-  background-color: ${props => props.theme.colors.LightBlue};
+  background-color: ${(props) => props.theme.colors.LightBlue};
   cursor: pointer;
   box-shadow: ${(props) => props.theme.shading.BoxShadow};
 
   &:hover {
-    background-color: ${props => props.theme.colors.Black};
-    color: ${props => props.theme.colors.LightPink};
+    background-color: ${(props) => props.theme.colors.Black};
+    color: ${(props) => props.theme.colors.LightPink};
   }
 `;

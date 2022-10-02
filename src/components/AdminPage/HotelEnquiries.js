@@ -1,7 +1,6 @@
 import ApiContext from "../../context/ApiContext";
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
+import { NavLink, useParams } from "react-router-dom";
 import {
   StyledSingleContainer,
   StyledName,
@@ -14,10 +13,11 @@ import Subheading from "../general/Subheading";
 import { StyledHotelMessagesContainer } from "./StyledHotelEnquiries";
 import HeadingH1Style from "../general/HeadingH1Style";
 import useCheckAuth from "../../hooks/useCheckAuth";
-import DeleteButton from "../general/DeleteButton";
+import GetHotelApi from "../../hooks/useApiCall";
 
 export default function HotelEnquiries() {
-  const [auth] = useContext(AuthContext);
+  GetHotelApi();
+  useCheckAuth();
   const [apiData] = useContext(ApiContext);
   const { id } = useParams();
   const [hotelMessages, setMessages] = useState([]);
@@ -32,8 +32,6 @@ export default function HotelEnquiries() {
       setMessages(getHotel[0].attributes.enquiries.data);
     }
   }, [id]);
-
-  useCheckAuth();
 
   return (
     <>
@@ -63,10 +61,6 @@ export default function HotelEnquiries() {
                         {moment(item.attributes.to).format("MMMM Do YYYY")}
                       </StyledDate>
                       <StyledEmail>Email: {item.attributes.email}</StyledEmail>
-                      <DeleteButton
-                        endpoint="api/enquiries/"
-                        itemId={item.id}
-                      />
                     </StyledSingleContainer>
                   );
                 })

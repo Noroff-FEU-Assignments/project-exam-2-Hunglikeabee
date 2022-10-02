@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import Carousel from "react-gallery-carousel";
-import "react-gallery-carousel/dist/index.css"
+import "react-gallery-carousel/dist/index.css";
 
 const StyledImageGallery = styled(Carousel)`
-& ul {
-  background-color: ${props => props.theme.colors.DarkGray};
-}
-& img {
-  object-fit: contain;
-  background-color: ${props => props.theme.colors.DarkGray};
-}
-`
+  & ul {
+    background-color: ${(props) => props.theme.colors.DarkGray};
+  }
+  & img {
+    object-fit: contain;
+    background-color: ${(props) => props.theme.colors.DarkGray};
+  }
+`;
 
 export default function ImagesCarousel({ images }) {
   const imageTest = images.map((image) => {
@@ -21,5 +21,13 @@ export default function ImagesCarousel({ images }) {
     };
   });
 
-  return <StyledImageGallery zIndexAtMax={"9004"} hasMediaButton={false} images={imageTest} style={{height: "300px", width: "600px", maxWidth: "100vw"}} />
+  return (
+    <StyledImageGallery
+      hasThumbnails={false}
+      zIndexAtMax={"9004"}
+      hasMediaButton={false}
+      images={imageTest}
+      style={{ height: "300px", width: "600px", maxWidth: "95vw" }}
+    />
+  );
 }

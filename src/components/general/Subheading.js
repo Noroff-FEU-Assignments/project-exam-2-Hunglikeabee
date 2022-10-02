@@ -1,4 +1,8 @@
-import { StyledHeading, StyledFirstLetter, StyledRestLetter } from "./SubheadingStyle";
+import {
+  StyledHeading,
+  StyledFirstLetter,
+  StyledRestLetter,
+} from "./SubheadingStyle";
 
 export default function Subheading(props) {
   const FirstLetter = props.children.charAt(0);

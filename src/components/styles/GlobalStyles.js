@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 h1, h2, h3, h4, button {
-  font-family: "BebasNeue";
+  font-family: "BebasNeue", Arial, Helvetica, sans-serif;
 }
 
 html, body {

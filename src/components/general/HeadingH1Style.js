@@ -33,11 +33,15 @@ const StyledHeading = styled.div`
   }
 `;
 
-const StyledFirstLetter = styled.h1`
+const StyledH1 = styled.h1``;
+
+const StyledFirstLetter = styled.span`
+  font-family: "BebasNeue", Arial, Helvetica, sans-serif;
   color: ${(props) => props.theme.colors.LightPink};
 `;
 
-const StyledRestLetter = styled.h1`
+const StyledRestLetter = styled.span`
+  font-family: "BebasNeue", Arial, Helvetica, sans-serif;
   color: black;
 `;
 
@@ -47,8 +51,10 @@ export default function HeadingH1Style(props) {
 
   return (
     <StyledHeading {...props}>
-      <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
-      <StyledRestLetter>{PropsText}</StyledRestLetter>
+      <StyledH1>
+        <StyledFirstLetter>{FirstLetter}</StyledFirstLetter>
+        <StyledRestLetter>{PropsText}</StyledRestLetter>
+      </StyledH1>
     </StyledHeading>
   );
 }

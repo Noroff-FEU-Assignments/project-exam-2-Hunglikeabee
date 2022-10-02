@@ -4,11 +4,10 @@ import { StyledHeroContainer, StyledHero } from "./StyledHeroImage";
 export default function Hero(props) {
   return (
     <StyledHeroContainer>
-      <StyledHero {...props}>
-        <HeadingH1Style position="absolute" offsetRight="30%">
-          {props.children}
-        </HeadingH1Style>
-      </StyledHero>
+      <StyledHero {...props}></StyledHero>
+      <HeadingH1Style position="absolute" offsetRight="30%">
+        {props.hotelName}
+      </HeadingH1Style>
     </StyledHeroContainer>
   );
 }

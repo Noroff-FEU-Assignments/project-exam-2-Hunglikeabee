@@ -132,7 +132,6 @@ export default function AddHotel() {
   }, []);
 
   const postHotel = async (data) => {
-    console.log(data);
     setSuccess(false);
     setDataTransit(true);
     setError(null);

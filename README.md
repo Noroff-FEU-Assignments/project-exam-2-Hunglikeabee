@@ -11,7 +11,7 @@ password: Pass1234
 
 ## Description
 
-Added basic JWT login capabilities, and a form check on the contact form using useForm and yup
+This is my exam project at the end of 2 years of school at Noroff. It has many of the skills we learned thru this course implemented in it. Like the ability to search, call an API, use JWT to login and handle post / get / delete requests. And to handle an API to display data where appropriate.
 
 
 ## Built With
@@ -24,7 +24,7 @@ React.js
 
 ### Clone the repo:
     
-    git clone git@github.com:Noroff-FEU-Assignments/js-frameworks-course-assignment-Hunglikeabee.git
+    git clone git@github.com:Noroff-FEU-Assignments/project-exam-2-Hunglikeabee.git
 
 ### Install the dependencies:
 
